@@ -1,0 +1,2 @@
+src/simulation/modules/reg8.v
+src/simulation/testbench.sv
