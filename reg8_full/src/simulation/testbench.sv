@@ -16,6 +16,22 @@ class scoreboard extends uvm_scoreboard;
         mon_analysis_imp = new("mon_analysis_imp", this);
     endfunction
 
+    bit [7:0] reg_out = 8'h00;
+
+    virtual function write(register_item item);
+
+        if((reg_out == item.parallel_output))
+            `uvm_info("[SCOREBOARD]", $sformatf("USPEH!"), UVM_LOW)
+        else 
+            `uvm_error("[SCOREBOARD]", $sformatf("NEUSPEH! Ocekivan out: %8b dobijen out: %8b", reg_out, item.parallel_output))
+        
+        if(item.control[1]) begin
+            reg_out = item.parallel_input;
+        end else if(item.control[0]) begin
+            reg_out = 8'h00;
+        end        
+
+    endfunction
 
 endclass //scoreboard
 
