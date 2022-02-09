@@ -13,7 +13,7 @@ class reg8_item extends uvm_sequence_item;
 		`uvm_field_int(ld, UVM_DEFAULT)
 		`uvm_field_int(inc, UVM_DEFAULT | UVM_BIN)
 		`uvm_field_int(in, UVM_ALL_ON)
-		`uvm_field_int(out, UVM_NO_PRINT)
+		`uvm_field_int(out, UVM_NOPRINT)
 	`uvm_object_utils_end
 
 	function new(string name="reg8_item");
