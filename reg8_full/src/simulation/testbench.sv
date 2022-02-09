@@ -45,7 +45,21 @@ class generator extends uvm_sequence;
         super.new(name);
     endfunction //new()
 
-    
+    virtual task body();
+
+        // LOAD
+        for (int i = 0; i < 3; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000000000000010;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created LOAD", i + 1, 3), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+    endtask
+
 endclass //generator
 
 
