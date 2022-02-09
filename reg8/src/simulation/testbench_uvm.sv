@@ -212,3 +212,44 @@ class env extends uvm_env;
 
 
 endclass
+
+// Test 
+class test extends uvm_test;
+
+	`uvm_component_utils(test);
+
+	function new(string name = "test", uvm_component parent = null);
+		super.new(name, parent);
+	endfunction 
+
+	virtual reg8_if vif;
+
+	env e0;
+	generator g0;
+
+	virtual function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		if(!uvm_config_db#(virtual reg8_if)::get(this, "", "reg8_vif", vif))
+			`uvm_fatal("Test", "No interface.")
+		
+		e0 = env::type_id::create("e0", this);
+		g0 = generator::type_id::create("g0");
+
+	endfunction
+
+	virtual function void end_of_elaboration_phase(uvm_phase phase);
+		uvm_top.print_topology();
+	endfunction
+
+	virtual task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+
+		vif.rst_n <= 0;
+		#20 vif.rst_n <= 1;
+
+		g0.start(e0.a0.s0);
+
+		phase.drop_objection(this);
+
+	endtask
+endclass
