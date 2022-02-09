@@ -37,6 +37,17 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class generator extends uvm_sequence;
+
+    `uvm_object_utils(generator)
+
+    function new(string name = "generator");
+        super.new(name);
+    endfunction //new()
+
+    
+endclass //generator
+
 
 class driver extends uvm_driver;
 
