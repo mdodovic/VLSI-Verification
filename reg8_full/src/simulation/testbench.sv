@@ -85,7 +85,7 @@ class driver extends uvm_driver #(register_item);
         forever begin
             register_item item;
 
-            seq_item_port.get_item(item);
+            seq_item_port.get_next_item(item);
 
             `uvm_info("[DRIVER]", $sformatf("%s", item.convert2str()), UVM_LOW)
             vif.control <= item.control;
