@@ -54,6 +54,25 @@ class driver extends uvm_driver;
             `uvm_fatal("[DRIVER]", "Could not get virtual interface!")
     endfunction
 
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);
+        @(posedge vif.clk)
+        forever begin
+            register_item item;
+
+            seq_item_port.get_item(item);
+
+            `uvm_info("[DRIVER]", $sformatf("%s", item.convert2str()), UVM_LOW)
+            vif.control <= item.control;
+            vif.serial_input_lsb <= item.serial_input_lsb;
+            vif.serial_input_msb <= item.serial_input_msb;
+            vif.parallel_input <= item.parallel_input;
+
+            @(posedge vif.clk)
+            seq_item_port.item_done();
+
+        end
+    endtask
 
 
 endclass //driver
