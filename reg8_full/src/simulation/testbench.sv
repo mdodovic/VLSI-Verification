@@ -37,6 +37,20 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class agent extends uvm_agent;
+
+    `uvm_component_utils(agent)
+
+    function new(string name = "agent", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction //new()
+
+    monitor m0;
+    driver d0;
+    uvm_sequencer #(register_item) s0;
+
+endclass //agent
+
 class scoreboard extends uvm_scoreboard;
 
     `uvm_component_utils(scoreboard)
