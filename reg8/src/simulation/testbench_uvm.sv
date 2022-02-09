@@ -129,7 +129,7 @@ class monitor extends uvm_monitor;
 
 			mon_analysis_port.write(item);
 		end
-	endfunction
+	endtask
 
 endclass
 
