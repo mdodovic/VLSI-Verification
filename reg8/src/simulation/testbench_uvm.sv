@@ -28,3 +28,28 @@ class reg8_item extends uvm_sequence_item;
 	endfunction
 
 endclass
+
+class generator extends uvm_sequence;
+
+	`uvm_object_utils(generator)
+
+	function new(string name="generator");
+		super.new(name);
+	endfunction
+
+	int num = 20;
+
+	virtual task body();
+		for(int i = 0; i < num; i++) begin
+			reg8_item item = reg8_item::type_id::create("item");
+			start_item(item);
+
+			item.randomize();
+			`uvm_info("Generator", $sformatf("Item %0d/%0d created", i + 1, num), UVM_LOW)
+			item.print();
+
+			finish_item(item);			
+		end
+	endtask
+
+endclass
