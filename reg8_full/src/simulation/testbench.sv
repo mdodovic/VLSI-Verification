@@ -9,6 +9,17 @@ class test;
         super.new(name, parent);
     endfunction //new()
 
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_if", vif))
+            `uvm_fatal("[TEST]", "Could not get virtual interface!")    
+
+        e0 = env::type_id::create("e0", this);
+        g0 = generator::type_id::create("g0", this);                
+    endfunction
+
+
 endclass //test
 
 interface register_if(
