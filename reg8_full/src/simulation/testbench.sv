@@ -37,6 +37,18 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class monitor extends uvm_monitor;
+
+    `uvm_component_utils(monitor)
+
+    function new(string name = "monitor", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction //new()
+
+    
+endclass //monitor
+
+
 class agent extends uvm_agent;
 
     `uvm_component_utils(agent)
