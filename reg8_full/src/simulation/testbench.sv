@@ -37,6 +37,19 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+
+class driver extends uvm_driver;
+
+    `uvm_component_utils(driver)
+
+    function new(string name = "driver", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction //new()
+
+    
+
+endclass //driver
+
 class monitor extends uvm_monitor;
 
     `uvm_component_utils(monitor)
