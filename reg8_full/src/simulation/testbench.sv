@@ -309,7 +309,7 @@ module testbench;
     end
 
     initial begin
-        uvm_config_db#(virtual register_if)::set(null, "*", "register_if", dut_if);
+        uvm_config_db#(virtual register_if)::set(null, "*", "register_vif", dut_if);
         run_test("test");
     end
 
