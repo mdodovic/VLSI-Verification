@@ -1,6 +1,18 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
+
+class evn extends uvm_env;
+
+    `uvm_component_utils(env);
+
+    function new(string name = "env", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction //new()
+    
+endclass //evn
+
+
 class test extends uvm_test;
 
     `uvm_component_utils(test);
