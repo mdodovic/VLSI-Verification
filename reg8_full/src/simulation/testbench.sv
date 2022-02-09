@@ -22,7 +22,7 @@ class register_item extends uvm_sequence_item;
         `uvm_field_int(serial_output_msb, UVM_NOPRINT)
         `uvm_field_int(parallel_output, UVM_NOPRINT)
 
-    `uvm_object_end
+    `uvm_object_utils_end
 
     function new(string name = "register_item");
         super.new(name);
