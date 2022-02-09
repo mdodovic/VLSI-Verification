@@ -11,6 +11,17 @@ class register_item extends uvm_sequence_item;
 	bit serial_output_msb;
 	bit [7:0] parallel_output;
 
+    `uvm_object_utils_begin(register_item)
+
+        `uvm_field_int(control, UVM_DEFAULT | UVM_BIN)
+        `uvm_field_int(serial_input_lsb, UVM_ALL_ON | UVM_BIN)
+        `uvm_field_int(serial_input_msb, UVM_ALL_ON | UVM_BIN)
+        `uvm_field_int(parallel_input, UVM_ALL_ON | UVM_BIN)
+        `uvm_field_int(serial_output_lsb, UVM_NOPRINT)
+        `uvm_field_int(serial_output_msb, UVM_NOPRINT)
+        `uvm_field_int(parallel_output, UVM_NOPRINT)
+
+    `uvm_object_end
 
 
     function new(string name = "register_item");
