@@ -103,6 +103,9 @@ class monitor extends uvm_monitor;
 		super.new(name, parent);
 	endfunction
 
+	virtual reg8_if vif;
+	uvm_analysis_port #(reg8_item) mon_analysis_port;
+
 	virtual function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
 		
