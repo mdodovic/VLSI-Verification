@@ -46,7 +46,15 @@ class driver extends uvm_driver;
         super.new(name, parent);
     endfunction //new()
 
+    virtual register_if vif;
     
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[DRIVER]", "Could not get virtual interface!")
+    endfunction
+
+
 
 endclass //driver
 
