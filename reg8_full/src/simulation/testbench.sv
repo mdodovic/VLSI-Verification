@@ -1,6 +1,16 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
+class test;
+
+    `uvm_component_utils(test);
+
+    function new(string name = "test", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction //new()
+
+endclass //test
+
 interface register_if(
     input bit clk
 );
