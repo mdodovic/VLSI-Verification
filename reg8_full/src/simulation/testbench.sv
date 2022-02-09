@@ -63,7 +63,7 @@ class generator extends uvm_sequence;
 endclass //generator
 
 
-class driver extends uvm_driver;
+class driver extends uvm_driver #(register_item);
 
     `uvm_component_utils(driver)
 
