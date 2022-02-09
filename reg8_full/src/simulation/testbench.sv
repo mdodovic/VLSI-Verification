@@ -35,4 +35,16 @@ module testbench;
         .parallel_output(dut_if.parallel_output)
     );
 
+    initial begin
+        clk = 0;
+        forever begin
+            #10 clk = ~clk;
+        end
+    end
+
+    initial begin
+        uvm_config_db#(virtual register_if)::set(null, "*", "register_if", register_if);
+        run_test("test");
+    end
+
 endmodule
