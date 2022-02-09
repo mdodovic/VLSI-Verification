@@ -93,3 +93,33 @@ class driver extends uvm_driver #(reg8_item);
 	endtask
 
 endclass
+
+// Monitor
+class monitor extends uvm_monitor;
+
+	`uvm_component_utils(monitor)
+
+	function new(string name = "monitor", uvm_component parent = null);
+		super.new(name, parent);
+	endfunction
+
+	virtual function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+
+		@(posedge vif.clk);
+		forever begin
+			reg8_item item = reg8_item::type_id::create("item");
+			@(posedge vif.clk);
+			
+			item.ld = vif.ld;
+			item.inc = vif.inc;
+			item.in = vif.in;
+			item.out = vif.out;
+			
+			`uvm_info("Monitor", $sformatf("%s", item.my_print()), UVM_LOW)
+
+			mon_analysis_port.write(item);
+		end
+	endfunction
+
+endclass
