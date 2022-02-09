@@ -1,6 +1,7 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
+
 class register_item extends uvm_sequence_item;
 
 	rand bit [14:0] control;
@@ -22,7 +23,6 @@ class register_item extends uvm_sequence_item;
         `uvm_field_int(parallel_output, UVM_NOPRINT)
 
     `uvm_object_end
-
 
     function new(string name = "register_item");
         super.new(name);
@@ -59,7 +59,7 @@ class generator extends uvm_sequence;
         end
 
     endtask
-
+    
 endclass //generator
 
 
@@ -99,7 +99,6 @@ class driver extends uvm_driver;
         end
     endtask
 
-
 endclass //driver
 
 class monitor extends uvm_monitor;
@@ -120,7 +119,7 @@ class monitor extends uvm_monitor;
 
         mon_analysis_port = new("mon_analysis_port", this);
     endfunction
-    
+
     virtual task run_phase(uvm_phase phase);
         super.run_phase(phase);
         @(posedge vif.clk)
@@ -141,10 +140,8 @@ class monitor extends uvm_monitor;
 
         end
     endtask
-
     
 endclass //monitor
-
 
 class agent extends uvm_agent;
 
@@ -179,7 +176,7 @@ class scoreboard extends uvm_scoreboard;
     function new(string name = "scoreboard", uvm_component parent = null);
         super.new(name, parent);
     endfunction //new()
-    
+
     uvm_analysis_imp #(register_item, scoreboard) mon_analysis_imp;
 
     virtual function void build_phase(uvm_phase phase);
@@ -239,6 +236,10 @@ class test extends uvm_test;
         super.new(name, parent);
     endfunction //new()
 
+    virtual register_if vif;
+    env e0;
+    generator g0;
+
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
@@ -262,7 +263,7 @@ class test extends uvm_test;
         g0.start(e0.a0.s0);
 
         phase.drop_objection(this);        
-    endtask //run_phase    
+    endtask //run_phase
 
 endclass //test
 
