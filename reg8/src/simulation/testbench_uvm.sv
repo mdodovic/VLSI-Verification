@@ -16,7 +16,7 @@ class reg8_item extends uvm_sequence_item;
 		`uvm_field_int(out, UVM_NOPRINT)
 	`uvm_object_utils_end
 
-	function new(string name="reg8_item");
+	function new(string name = "reg8_item");
 		super.new(name);
 	endfunction
 
@@ -34,7 +34,7 @@ class generator extends uvm_sequence;
 
 	`uvm_object_utils(generator)
 
-	function new(string name="generator");
+	function new(string name = "generator");
 		super.new(name);
 	endfunction
 
@@ -139,7 +139,7 @@ endclass
 // Agent
 class agent extends uvm_agent;
 
-	`uvm_component_utils(agent);
+	`uvm_component_utils(agent)
 
 	function new(string name = "agent", uvm_component parent = null);
 		super.new(name, parent);
@@ -154,12 +154,12 @@ class agent extends uvm_agent;
 
 		d0 = driver::type_id::create("d0", this);
 		m0 = monitor::type_id::create("m0", this);
-		s0 = uvm_sequencer#(reg8_item)::type_id::create("d0", this);
+		s0 = uvm_sequencer#(reg8_item)::type_id::create("s0", this);
 	endfunction 
 
 	virtual function void connect_phase(uvm_phase phase);
 		super.connect_phase(phase);
-		d0.seq_item.port.connect(s0.seq_item_export);
+		d0.seq_item_port.connect(s0.seq_item_export);
 	endfunction
 
 endclass
@@ -224,6 +224,7 @@ class env extends uvm_env;
 
 
 endclass
+
 
 // Test 
 class test extends uvm_test;
