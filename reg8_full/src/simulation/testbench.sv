@@ -28,7 +28,7 @@ class test extends uvm_test;
             `uvm_fatal("[TEST]", "Could not get virtual interface!")    
 
         e0 = env::type_id::create("e0", this);
-        g0 = generator::type_id::create("g0", this);                
+        g0 = generator::type_id::create("g0");                
     endfunction
 
     virtual function void end_of_elaboration_phase(uvm_phase phase);
