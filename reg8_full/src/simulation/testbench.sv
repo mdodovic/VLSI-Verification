@@ -45,7 +45,7 @@ class scoreboard extends uvm_scoreboard;
         super.new(name, parent);
     endfunction //new()
     
-    uvm_analysis_imp #(register_if, scoreboard) mon_analysis_imp;
+    uvm_analysis_imp #(register_item, scoreboard) mon_analysis_imp;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
