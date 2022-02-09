@@ -56,6 +56,27 @@ class monitor extends uvm_monitor;
         mon_analysis_port = new("mon_analysis_port", this);
     endfunction
     
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);
+        @(posedge vif.clk)
+        forever begin
+            register_item item = register_item::type_ide::create("item");
+            @(posedge vif.clk)
+
+            item.control = vif.control;
+            item.serial_input_lsb = vif.serial_input_lsb;
+            item.serial_input_msb = vif.serial_input_msb;
+            item.parallel_input = vif.parallel_input;
+            item.serial_output_lsb = vif.serial_output_lsb;
+            item.serial_output_msb = vif.serial_output_msb;
+            item.parallel_output = vif.parallel_output;
+            `uvm_info("[MONITOR]", $sformatf("%s", item.convert2str()), UVM_LOW)
+
+            mon_analysis_port.write(item);            
+
+        end
+    endtask
+
     
 endclass //monitor
 
