@@ -153,7 +153,7 @@ class agent extends uvm_agent;
 endclass
 
 // Scoreboard
-class scoreboard extends uvm_scoreboard
+class scoreboard extends uvm_scoreboard;
 
 	`uvm_component_utils(scoreboard)
 
