@@ -124,7 +124,7 @@ class monitor extends uvm_monitor;
         super.run_phase(phase);
         @(posedge vif.clk)
         forever begin
-            register_item item = register_item::type_ide::create("item");
+            register_item item = register_item::type_id::create("item");
             @(posedge vif.clk)
 
             item.control = vif.control;
