@@ -1,6 +1,31 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
+class register_item extends uvm_sequence_item;
+
+	rand bit [14:0] control;
+	rand bit serial_input_lsb;
+	rand bit serial_input_msb;
+	rand bit [7:0] parallel_input;
+	bit serial_output_lsb;
+	bit serial_output_msb;
+	bit [7:0] parallel_output;
+
+
+
+    function new(string name = "register_item");
+        super.new(name);
+    endfunction //new()
+
+    virtual function string convert2str();
+        return $sformatf("control = %15b serial_input_lsb = %1b serial_input_msb = %1b parallel_input = %8b serial_output_lsb = %1b serial_output_msb = %1b parallel_output = %8b",
+            control, serial_input_lsb, serial_input_msb, parallel_input, serial_output_lsb, serial_output_msb, parallel_output
+        );
+    endfunction
+
+
+endclass //register_item
+
 class scoreboard extends uvm_scoreboard;
 
     `uvm_component_utils(scoreboard)
