@@ -49,6 +49,18 @@ class agent extends uvm_agent;
     driver d0;
     uvm_sequencer #(register_item) s0;
 
+    virtual function build_phase(phase);
+        super.build_phase(phase);
+        m0 = monitor::type_id::create("m0", this);
+        d0 = driver::type_id::create("d0", this);
+        s0 = uvm_sequencer#(register_item)::type_id::create("s0", this);
+    endfunction
+
+    virtual function connect_phase(phase);
+        super.connect_phase(phase);
+        d0.seq_item_port.connect(s0.seq_item_export);
+    endfunction
+
 endclass //agent
 
 class scoreboard extends uvm_scoreboard;
