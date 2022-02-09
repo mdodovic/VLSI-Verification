@@ -151,3 +151,38 @@ class agent extends uvm_agent;
 	endfunction
 
 endclass
+
+// Scoreboard
+class scoreboard extends uvm_scoreboard
+
+	`uvm_component_utils(scoreboard)
+
+	function new(string name = "scoreboard", uvm_component parent = null);
+		super.new(name, parent);
+	endfunction 
+
+	uvm_analysis_imp #(reg8_item, scoreboard) mon_analysis_imp;
+
+	virtual function void build_phase(uvm_phase phase);
+
+		super.build_phase(phase);
+		mon_analysis_imp = new("mon_analysis_imp", this);
+	endfunction
+
+	bit [7:0] reg8 = 8'h00;
+
+	virtual function write(reg8_item item);
+		
+		if(reg8 == item.out)
+			`uvm_info("Scoreboard", $sformatf("PASS!"), UVM_LOW)
+		else
+			`uvm_error("Scoreboard", $sformatf("FAIL! expected = %8b, got = %8b", reg8, item.out))
+
+		if(item.ld) 
+			reg8 = item.in;
+		else if(item.inc)	
+			reg8 = reg8 + 8'h01;
+
+	endfunction
+
+endclass
