@@ -203,7 +203,7 @@ class scoreboard extends uvm_scoreboard;
 
 endclass //scoreboard
 
-class evn extends uvm_env;
+class env extends uvm_env;
 
     `uvm_component_utils(env)
 
