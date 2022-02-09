@@ -253,3 +253,13 @@ class test extends uvm_test;
 
 	endtask
 endclass
+
+interface reg8_if (
+	input bit clk
+);
+	logic rst_n;
+	logic ld;
+	logic inc;
+	logic [7:0] in;
+	logic [7:0] out;
+endinterface
