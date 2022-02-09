@@ -112,7 +112,7 @@ class monitor extends uvm_monitor;
     virtual register_if vif;
     uvm_analysis_port #(register_item) mon_analysis_port;
 
-    virtual function build_phase(phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if(!uvm_config_db#(virtual register_if)::get(this, "", "register_if", vif))
             `uvm_fatal("[MONITOR]", "Could not get virtual interface!")    
