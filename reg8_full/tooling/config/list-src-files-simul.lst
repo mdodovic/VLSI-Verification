@@ -1,0 +1,2 @@
+src/simulation/modules/dut.vp
+src/simulation/testbench.sv
