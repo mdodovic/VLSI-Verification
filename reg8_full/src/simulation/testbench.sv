@@ -286,8 +286,8 @@ module testbench;
     reg clk;
 
     register_if dut_if (
-        .clk(clk);
-    )
+        .clk(clk)
+    );
     
     dut dut_inst (
         .clk(clk),
