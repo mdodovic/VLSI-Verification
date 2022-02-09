@@ -263,3 +263,35 @@ interface reg8_if (
 	logic [7:0] in;
 	logic [7:0] out;
 endinterface
+
+
+// Testbench
+module testbench_uvm;
+
+	reg clk;
+
+	reg8_if dut_if(
+		.clk(clk)
+	);
+	reg8 dut(
+		.clk(clk),
+		.rst_n(dut_if.rst_n),
+		.ld(dut_if.ld),
+		.inc(dut_if.inc),
+		.in(dut_if.in),
+		.out(dut_if.out)
+	);
+
+	initial begin
+		clk = 0;
+		forever begin
+			#10 clk = ~clk;
+		end
+	end
+
+	initial begin
+		uvm_config_db#(virtual reg8_if)::set(null, "*", "reg8_vif", dut_if);
+		run_test("test");
+	end
+
+endmodule
