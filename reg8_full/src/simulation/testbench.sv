@@ -19,6 +19,9 @@ class test;
         g0 = generator::type_id::create("g0", this);                
     endfunction
 
+    virtual function void end_of_elaboration_phase(uvm_phase phase);
+        uvm_top.print_topology();        
+    endfunction
 
 endclass //test
 
