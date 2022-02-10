@@ -145,7 +145,18 @@ class generator extends uvm_sequence;
             item.print();
             finish_item(item);
         end
+
         // SERIAL_INPUT_MSB
+        for(int i = 0; i < 16; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0001_0000_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL_INPUT_MSB]: ", i + 1, 16), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
         // SHIFT_LOGICAL_LEFT
         // SHIFT_LOGICAL_RIGHT
         // SHIFT_ARITHMETIC_LEFT
