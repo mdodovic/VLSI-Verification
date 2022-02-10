@@ -37,6 +37,21 @@ class agent extends uvm_agent;
         super.new(name, parent);        
     endfunction //new()
 
+    driver d0;
+    monitor m0;
+    uvm_sequencer#(register_item) s0;
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);  
+        d0 = driber::type_id::create("d0", this);
+        m0 = monitor::type_id::create("m0", this);
+        s0 = uvm_sequencer#(register_item)::type_id::create("s0", this);
+    endfunction
+
+    virtual function void connect_phase(uvm_phase phase);
+        super.connect_phase(phase);  
+        d0.seq_item_port.connect(s0.seq_item_export);
+    endfunction
 
 endclass //agent
 
