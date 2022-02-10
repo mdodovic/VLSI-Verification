@@ -73,11 +73,23 @@ class generator extends uvm_sequence;
             start_item(item);
             item.randomize();
             item.parallel_input = 8'hFE;
-            item.control = 15'b000_0000_0000_0001;
+            item.control = 15'b000_0000_0000_0010;
             `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]: ", i + 1, 1), UVM_LOW)
             item.print();
             finish_item(item);
         end
+
+        // INC
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0000_0100;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INC]: ", i + 1, 10), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
 
     endtask
 
