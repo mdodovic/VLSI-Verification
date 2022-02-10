@@ -233,7 +233,7 @@ class test extends uvm_test;
             `uvm_fatal("[TEST]", "No interface!")
 
         e0 = env::type_id::create("e0", this);
-        g0 = env::type_id::create("g0", this);
+        g0 = generator::type_id::create("g0", this);
     endfunction
 
 
