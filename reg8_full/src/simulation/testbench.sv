@@ -74,7 +74,7 @@ class generator extends uvm_sequence;
             item.randomize();
             item.parallel_input = 8'hFE;
             item.control = 15'b000_0000_0000_0001;
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]: ", i + 1, 3), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]: ", i + 1, 1), UVM_LOW)
             item.print();
             finish_item(item);
         end
@@ -213,7 +213,9 @@ class scoreboard extends uvm_scoreboard;
 
     virtual function void write(register_item item);
         if((item.parallel_output == reg_output) && (item.serial_output_lsb == lsb) && (item.serial_output_msb == msb))
-            `uvm_info("[SCOREBOARD]", "PASS!", UVM_LOW)
+            `uvm_info("[SCOREBOARD]", $sformatf("PASS! \n Expected output %8b != got output %8b; Expected msb %1b != got msb %1b; Expected lsb %1b != got lsb %1b; ", 
+                            reg_output, item.parallel_output, msb, item.serial_output_msb, lsb, item.serial_output_lsb
+                            ), UVM_LOW)
         else 
             `uvm_error("[SCOREBOARD]", $sformatf("ERROR! Expected output %8b != got output %8b; Expected msb %1b != got msb %1b; Expected lsb %1b != got lsb %1b; ", 
                 reg_output, item.parallel_output, msb, item.serial_output_msb, lsb, item.serial_output_lsb
