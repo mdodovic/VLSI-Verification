@@ -29,6 +29,17 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class agent extends uvm_agent;
+
+    `uvm_component_utils(test)
+
+    function new(string name = "agent", uvm_component parent = null);
+        super.new(name, parent);        
+    endfunction //new()
+
+
+endclass //agent
+
 class scoreboard extends uvm_scoreboard;
 
     `uvm_component_utils(test)
@@ -80,7 +91,7 @@ class env extends uvm_env;
 
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);  
-        a0.m0.mon_analysis_port(sb0.mon_analysis_imp);
+        a0.m0.mon_analysis_port.connect(sb0.mon_analysis_imp);
     endfunction
 
 endclass //env
