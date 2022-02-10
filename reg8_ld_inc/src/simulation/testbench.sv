@@ -9,6 +9,14 @@ class env extends uvm_env;
         super.new(name, parent);        
     endfunction //new()
 
+    agent a0;
+    scoreboard sb0;
+
+    virtual function void build_phase(uvm_phase phase);
+        a0 = agent::type_id::create("a0", this);
+        sb0 = scoreboard::type_id::create("sb0", this);
+    endfunction
+
 
 
 endclass //env
