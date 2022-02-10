@@ -54,7 +54,7 @@ endclass //generator extends uvm_generator
 
 class driver extends uvm_driver#(register_item);
     
-    `uvm_component_utils(test)
+    `uvm_component_utils(driver)
 
     function new(string name = "driver", uvm_component parent = null);
         super.new(name, parent);        
@@ -93,21 +93,21 @@ endclass //driver
 
 class monitor extends uvm_monitor;
     
-    `uvm_component_utils(test)
+    `uvm_component_utils(monitor)
 
     function new(string name = "montior", uvm_component parent = null);
         super.new(name, parent);        
     endfunction //new()
 
     virtual register_if vif;
-    uvm_analyser_port#(register_item) mon_analyser_port;
+    uvm_analysis_port #(register_item) mon_analysis_port;
 
     virtual function void build_phase(uvm_phase phase);
 
         super.build_phase(phase);  
     if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
             `uvm_fatal("[MONITOR]", "No interface!")
-        mon_analyser_port = new("mon_analyser_port", this);
+        mon_analysis_port = new("mon_analysis_port", this);
 
     endfunction
 
@@ -125,7 +125,7 @@ class monitor extends uvm_monitor;
 
             `uvm_info("[MONITOR]", $sformatf("%s", item.convert2str()), UVM_LOW)
 
-            mon_analyser_port.write(item);
+            mon_analysis_port.write(item);
 
         end
     endtask;
