@@ -259,13 +259,13 @@ endclass //test
 
 
 interface register_if(
-    input bit clk;
+    input bit clk
 );
-    logic rst_n,
-    logic ld,
-    logic inc,
-    logic [7:0] in,
-    logic [7:0] out
+    logic rst_n;
+    logic ld;
+    logic inc;
+    logic [7:0] in;
+    logic [7:0] out;
 endinterface //register_if
 
 module testbench;
