@@ -225,6 +225,7 @@ class test extends uvm_test;
 
     env e0;
     generator g0;
+    virtual register_if vif;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);        
