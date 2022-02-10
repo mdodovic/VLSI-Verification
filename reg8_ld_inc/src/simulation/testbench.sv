@@ -1,6 +1,34 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
+class register_item extends uvm_sequence_item;
+
+    rand bit ld;
+    rand bit inc;
+    rand bit [7:0] in;
+
+    bit [7:0] out;
+
+    `uvm_object_utils_begin(register_item)
+
+        `uvm_field_int(ld, UVM_DEFAULT | UVM_BIN)
+        `uvm_field_int(inc, UVM_DEFAULT | UVM_BIN)
+        `uvm_field_int(in, UVM_ALL_ON | UVM_BIN)
+        `uvm_field_int(out, UVM_NOPRINT)
+        
+    `uvm_object_utils_end
+
+
+    function new(string name = "register_item");
+        super.new(name);        
+    endfunction //new()
+
+    virtual function string convert2str();
+        return $sformatf("ld = %1b, inc = %1b, in = %8b, out = %8b", ld, inc, in, out);
+    endfunction
+
+endclass //register_item
+
 class scoreboard extends uvm_scoreboard;
 
     `uvm_component_utils(test)
