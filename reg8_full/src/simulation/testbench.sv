@@ -248,6 +248,49 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
+        // Control operation priority
+        // CLEAR
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b111_1111_1111_1111;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [CONTROL_PRIORITY - CLEAR]: ", i + 1, 1), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+        // Nothing (clock consuming)
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]: ", i + 1, 1), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+       // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b111_1111_1111_1110;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [CONTROL_PRIORITY - LOAD]: ", i + 1, 1), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+        // Nothing (clock consuming)
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]: ", i + 1, 1), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+
     endtask
 
 endclass //generator extends uvm_sequence
