@@ -29,6 +29,45 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class driver extends uvm_driver#(register_item);
+    
+    `uvm_component_utils(test)
+
+    function new(string name = "driver", uvm_component parent = null);
+        super.new(name, parent);        
+    endfunction //new()
+
+    virtual register_if vif;
+
+    virtual function void build_phase(uvm_phase phase);
+
+        super.build_phase(phase);  
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[DRIVER]", "No interface!")
+    endfunction
+
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);  
+
+        @(posedge vif.clk);
+
+        forever begin
+            register_item item;
+            seq_item_port.get_next_item(item);
+            `uvm_info("[DRIVER]", $sformatf("%s", item.convert2str()), UVM_LOW)
+
+            vif.ld <= item.ld;
+            vif.inc <= item.inc;
+            vif.in <= item.in;
+            
+            @(posedge vid.clk);
+            seq_item_port.item_done();
+        end
+
+    endtask
+
+endclass //driver
+
 class monitor extends uvm_monitor;
     
     `uvm_component_utils(test)
