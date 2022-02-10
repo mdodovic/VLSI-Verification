@@ -101,7 +101,48 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
-        
+        // ADD
+        for(int i = 0; i < 5; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0001_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [ADD]: ", i + 1, 5), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+        // SUB
+        for(int i = 0; i < 5; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0010_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SUB]: ", i + 1, 5), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+        // INVERT
+        for(int i = 0; i < 2; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0100_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INVERT]: ", i + 1, 2), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+
+        // SERIAL_INPUT_LSB
+        // SERIAL_INPUT_MSB
+        // SHIFT_LOGICAL_LEFT
+        // SHIFT_LOGICAL_RIGHT
+        // SHIFT_ARITHMETIC_LEFT
+        // SHIFT_ARITHMETIC_RIGHT
+        // ROTATE_LEFT
+        // ROTATE_RIGHT
 
 
     endtask
@@ -246,6 +287,10 @@ class scoreboard extends uvm_scoreboard;
                 reg_output, item.parallel_output, msb, item.serial_output_msb, lsb, item.serial_output_lsb
                 ))
 
+        msb = 1'b0;
+        lsb = 1'b0;
+
+
         if(item.control[0]) begin
             // CLEAR
             lsb = 1'b0;
@@ -274,35 +319,10 @@ class scoreboard extends uvm_scoreboard;
             reg_output = reg_output - 1'b1;
         end else if(item.control[4]) begin
             // ADD
-            bit[8:0] carry_bit = 9'h000;
-            for(int i = 0; i < 8; i++) begin
-                if(reg_output[i] && item.parallel_input[i])
-                    carry_bit[i] = 1'b1;
-                else if(reg_output[i] && !item.parallel_input[i] && carry_bit[i])
-                    carry_bit[i] = 1'b1;
-                else if(!reg_output[i] && item.parallel_input[i] && carry_bit[i])
-                    carry_bit[i] = 1'b1;
-                else
-                    carry_bit[i] = 1'b0;
-            end
-
-            if(carry_bit[8])
-                msb = 1'b1;
-            else 
-                msb = 1'b0;
-            lsb = 1'b0;
-            reg_output = reg_output + item.parallel_input;
+            {msb, reg_output} = reg_output + item.parallel_input;
         end else if(item.control[5]) begin
             // SUB
-            bit[8:0] signed_substraction;
-            signed_substraction = reg_output - item.parallel_input;
-
-            if(signed_substraction[8])
-                msb = 1'b1;
-            else 
-                msb = 1'b0;
-            lsb = 1'b0;
-            reg_output = reg_output - item.parallel_input;
+            {msb, reg_output} = reg_output - item.parallel_input;
         end else if(item.control[6]) begin
             // INVERT
             msb = 1'b0;
