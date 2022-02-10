@@ -147,7 +147,7 @@ class agent extends uvm_agent;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);  
-        d0 = driber::type_id::create("d0", this);
+        d0 = driver::type_id::create("d0", this);
         m0 = monitor::type_id::create("m0", this);
         s0 = uvm_sequencer#(register_item)::type_id::create("s0", this);
     endfunction
@@ -180,7 +180,7 @@ class scoreboard extends uvm_scoreboard;
         if(reg_out == item.out)
             `uvm_info("[SCOREBOARD]", $sformatf("USPEH!"), UVM_LOW)
         else 
-            `uvm_error("[SCOREBOARD]", $sformatf("GRESKA! Ocekivani %8b dobijeni %8b", reg_out, item.out), UVM_LOW)
+            `uvm_error("[SCOREBOARD]", $sformatf("GRESKA! Ocekivani %8b dobijeni %8b", reg_out, item.out))
 
         if(item.ld)
             reg_out = item.in;
