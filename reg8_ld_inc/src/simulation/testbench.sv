@@ -29,6 +29,48 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class monitor extends uvm_monitor;
+    
+    `uvm_component_utils(test)
+
+    function new(string name = "montior", uvm_component parent = null);
+        super.new(name, parent);        
+    endfunction //new()
+
+    virtual register_if vif;
+    uvm_analyser_port#(register_item) mon_analyser_port;
+
+    virtual function void build_phase(uvm_phase phase);
+
+        super.build_phase(phase);  
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[DRIVER]", "No interface!")
+        mon_analyser_port = new("mon_analyser_port", this);
+
+    endfunction
+
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);  
+        @(posedge vif.clk)
+        forever begin
+            register_item item = register_item::type_id::create("item");
+            @(posedge vif.clk)
+
+            item.ld = vif.ld;
+            item.inc = vif.inc;
+            item.in = vif.in;
+            item.out = vif.out;
+
+            `uvm_info("[MONITOR]", $sformatf("%s", item.convert2str()), UVM_LOW)
+
+            mon_analyser_port.write(item);
+
+        end
+    endtask;
+
+endclass //monitor extends uvm_monitor
+
+
 class agent extends uvm_agent;
 
     `uvm_component_utils(test)
