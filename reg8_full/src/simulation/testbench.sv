@@ -45,16 +45,40 @@ class generator extends uvm_sequence;
 
     virtual task body();
 
+        // LOAD
         for(int i = 0; i < 3; i++) begin
             register_item item = register_item::type_id::create("item");
             start_item(item);
             item.randomize();
             item.control = 15'b000_0000_0000_0010;
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated: ", i + 1, 3), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]: ", i + 1, 3), UVM_LOW)
             item.print();
             finish_item(item);
         end
+
+        // CLEAR
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0000_0001;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [CLEAR]: ", i + 1, 1), UVM_LOW)
+            item.print();
+            finish_item(item);            
+        end
         
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.parallel_input = 8'hFE;
+            item.control = 15'b000_0000_0000_0001;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]: ", i + 1, 3), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
     endtask
 
 endclass //generator extends uvm_sequence
