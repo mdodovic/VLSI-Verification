@@ -83,7 +83,7 @@ class driver extends uvm_driver#(register_item);
             vif.inc <= item.inc;
             vif.in <= item.in;
             
-            @(posedge vid.clk);
+            @(posedge vif.clk);
             seq_item_port.item_done();
         end
 
