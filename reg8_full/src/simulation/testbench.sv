@@ -136,6 +136,15 @@ class generator extends uvm_sequence;
 
 
         // SERIAL_INPUT_LSB
+        for(int i = 0; i < 16; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_1000_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL_INPUT_LSB]: ", i + 1, 16), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
         // SERIAL_INPUT_MSB
         // SHIFT_LOGICAL_LEFT
         // SHIFT_LOGICAL_RIGHT
@@ -325,22 +334,13 @@ class scoreboard extends uvm_scoreboard;
             {msb, reg_output} = reg_output - item.parallel_input;
         end else if(item.control[6]) begin
             // INVERT
-            msb = 1'b0;
-            lsb = 1'b0;
-            reg_output = ~reg_output;
+            reg_output = reg_output ^ 8'hFF;
         end else if(item.control[7]) begin
             // SERIAL_INPUT_LSB - SHIFT LEFT
-            msb = reg_output[7];
-            lsb = 1'b0;
-            for(int i = 7; i >= 1; i++)
-                reg_output[i] = reg_output[i - 1];
-            reg_output[0] = item.serial_input_lsb;
+            {msb, reg_output} = {reg_output, item.serial_input_lsb};
         end else if(item.control[8]) begin
             // SERIAL_INPUT_MSB - SHIFT RIGHT
-            msb = 1'b0;
-            lsb = reg_output[0];
-            reg_output = reg_output / 2;
-            reg_output[7] = item.serial_input_msb;
+            {reg_output, lsb} = {item.serial_input_msb, reg_output};
         end else if(item.control[9]) begin
             // SHIFT_LOGICAL_LEFT
             bit [7:0] temp;
