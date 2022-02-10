@@ -135,7 +135,7 @@ endclass //monitor extends uvm_monitor
 
 class agent extends uvm_agent;
 
-    `uvm_component_utils(test)
+    `uvm_component_utils(agent)
 
     function new(string name = "agent", uvm_component parent = null);
         super.new(name, parent);        
@@ -161,7 +161,7 @@ endclass //agent
 
 class scoreboard extends uvm_scoreboard;
 
-    `uvm_component_utils(test)
+    `uvm_component_utils(scoreboard)
 
     function new(string name = "scoreboard", uvm_component parent = null);
         super.new(name, parent);        
@@ -194,7 +194,7 @@ endclass //scoreboard
 
 class env extends uvm_env;
 
-    `uvm_component_utils(test)
+    `uvm_component_utils(env)
 
     function new(string name = "env", uvm_component parent = null);
         super.new(name, parent);        
