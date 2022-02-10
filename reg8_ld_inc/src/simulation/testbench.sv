@@ -288,7 +288,7 @@ module testbench;
     initial begin
         clk = 0;
         forever begin
-            #10 clk = ~clk
+            #10 clk = ~clk;
         end            
     end
 
