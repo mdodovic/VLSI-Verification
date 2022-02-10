@@ -17,7 +17,10 @@ class env extends uvm_env;
         sb0 = scoreboard::type_id::create("sb0", this);
     endfunction
 
-
+    virtual function void connect_phase(uvm_phase phase);
+        super.connect_phase(phase);  
+        a0.m0.mon_analysis_port(sb0.mon_analysis_imp);
+    endfunction
 
 endclass //env
 
