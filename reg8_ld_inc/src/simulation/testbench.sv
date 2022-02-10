@@ -1,6 +1,17 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
+class scoreboard extends uvm_scoreboard;
+
+    `uvm_component_utils(test)
+
+    function new(string name = "scoreboard", uvm_component parent = null);
+        super.new(name, parent);        
+    endfunction //new()
+
+
+endclass //scoreboard
+
 class env extends uvm_env;
 
     `uvm_component_utils(test)
