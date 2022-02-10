@@ -9,8 +9,30 @@ class scoreboard extends uvm_scoreboard;
         super.new(name, parent);        
     endfunction //new()
 
+    uvm_analysis_imp#(register_item, scoreboard) mon_analysis_imp;
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);  
+        mon_analysis_imp = new("mon_analysis_imp", this);
+    endfunction
+
+    bit [7:0] reg_out = 8'h00;
+
+    virtual function write(register_item item);
+        if(reg_out == item.out)
+            `uvm_info("[SCOREBOARD]", $sformatf("USPEH!"), UVM_LOW)
+        else 
+            `uvm_error("[SCOREBOARD]", $sformatf("GRESKA! Ocekivani %8b dobijeni %8b", reg_out, item.out), UVM_LOW)
+
+        if(item.ld)
+            reg_out = item.in;
+        else if(item.inc)
+            reg_out = reg_out + 1'b1;   
+
+    endfunction 
 
 endclass //scoreboard
+
 
 class env extends uvm_env;
 
