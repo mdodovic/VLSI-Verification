@@ -9,6 +9,15 @@ class test extends uvm_test;
         super.new(name, parent);        
     endfunction //new()
 
+    virtual function void build_phase(uvm_phase phase);
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[TEST]", "No interface!")
+
+        e0 = env::type_id::create("e0", this);
+        g0 = env::type_id::create("g0", this);
+    endfunction
+
+
 endclass //test
 
 
