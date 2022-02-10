@@ -196,14 +196,130 @@ class scoreboard extends uvm_scoreboard;
                 ))
 
         if(item.control[0]) begin
+            // CLEAR
             lsb = 1'b0;
             msb = 1'b0;
             reg_output = 8'h00;
         end else if(item.control[1]) begin
+            // LOAD
             lsb = 1'b0;
             msb = 1'b0;
             reg_output = item.parallel_input;            
-        end
+        end else if(item.control[2]) begin
+            // INC
+            if(reg_output == 8'hFF) 
+                msb = 1'b1;
+            else 
+                msb = 1'b0;
+            lsb = 1'b0;
+            reg_output = reg_output + 1'b1;
+        end else if(item.control[3]) begin
+            // DEC
+            if(reg_output == 8'h00) 
+                msb = 1'b1;
+            else 
+                msb = 1'b0;
+            lsb = 1'b0;
+            reg_output = reg_output - 1'b1;
+        end else if(item.control[4]) begin
+            // ADD
+            bit[8:0] carry_bit = 9'h000;
+            for(int i = 0; i < 8; i++) begin
+                if(reg_output[i] && item.parallel_input[i])
+                    carry_bit[i] = 1'b1;
+                else if(reg_output[i] && !item.parallel_input[i] && carry_bit[i])
+                    carry_bit[i] = 1'b1;
+                else if(!reg_output[i] && item.parallel_input[i] && carry_bit[i])
+                    carry_bit[i] = 1'b1;
+                else
+                    carry_bit[i] = 1'b0;
+            end
+
+            if(carry_bit[8])
+                msb = 1'b1;
+            else 
+                msb = 1'b0;
+            lsb = 1'b0;
+            reg_output = reg_output + item.parallel_input;
+        end else if(item.control[5]) begin
+            // SUB
+            bit[8:0] signed_substraction;
+            signed_substraction = reg_output - item.parallel_input;
+
+            if(signed_substraction[8])
+                msb = 1'b1;
+            else 
+                msb = 1'b0;
+            lsb = 1'b0;
+            reg_output = reg_output - item.parallel_input;
+        end else if(item.control[6]) begin
+            // INVERT
+            msb = 1'b0;
+            lsb = 1'b0;
+            reg_output = ~reg_output;
+        end else if(item.control[7]) begin
+            // SERIAL_INPUT_LSB - SHIFT LEFT
+            msb = reg_output[7];
+            lsb = 1'b0;
+            for(int i = 7; i >= 1; i++)
+                reg_output[i] = reg_output[i - 1];
+            reg_output[0] = item.serial_input_lsb;
+        end else if(item.control[8]) begin
+            // SERIAL_INPUT_MSB - SHIFT RIGHT
+            msb = 1'b0;
+            lsb = reg_output[0];
+            reg_output = reg_output / 2;
+            reg_output[7] = item.serial_input_msb;
+        end else if(item.control[9]) begin
+            // SHIFT_LOGICAL_LEFT
+            bit [7:0] temp;
+            msb = reg_output[7];
+            lsb = 1'b0;
+            temp = 8'h00;
+            temp = reg_output;
+            for (int i = 1; i < 8; i++) begin
+                reg_output[i] = temp[i-1];
+            end
+            reg_output[0] = 1'b0;
+        end else if(item.control[10]) begin
+            // SHIFT_LOGICAL_RIGHT
+            lsb = reg_output[0];
+            msb = 1'b0;
+
+            reg_output = reg_output / 2;
+            reg_output[7] = 1'b0;
+        end else if(item.control[11]) begin
+            // SHIFT_ARITHMETIC_LEFT
+            bit [7:0] temp;
+            msb = reg_output[7];
+            lsb = 1'b0;
+            temp = 8'h00;
+            temp = reg_output;
+            for (int i = 1; i < 8; i++) begin
+                reg_output[i] = temp[i-1];
+            end
+            reg_output[0] = 1'b0;
+        end else if(item.control[12]) begin
+            // SHIFT_ARITHMETIC_RIGHT
+            bit previous_msb = reg_output[7];
+            lsb = reg_output[0];
+            msb = 1'b0;
+            reg_output = reg_output / 2;
+            reg_output[7] = previous_msb;
+        end else if(item.control[13]) begin
+            // ROTATE_LEFT
+            msb = reg_output[7];
+            lsb = 1'b0;
+            reg_output = reg_output * 2;
+            reg_output[0] = msb;
+        end else if(item.control[14]) begin
+            // ROTATE_RIGHT
+            lsb = reg_output[0];
+            msb = 1'b0;
+            reg_output = reg_output / 2;
+            reg_output[7] = lsb;
+
+        end 
 
     endfunction
 
