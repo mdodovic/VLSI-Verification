@@ -23,6 +23,19 @@ class test extends uvm_test;
         uvm_top.print_topology();
     endfunction
 
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);        
+
+        phase.raise_objection(this);
+
+        vif.rst_n <= 0;
+        #20 vif.rst_n <= 1;
+
+        g0.start(e0.a0.s0);
+
+        phase.drop_objection(this);
+
+    endtask
 
 
 endclass //test
