@@ -10,6 +10,7 @@ class test extends uvm_test;
     endfunction //new()
 
     virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);        
         if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
             `uvm_fatal("[TEST]", "No interface!")
 
