@@ -43,8 +43,8 @@ class monitor extends uvm_monitor;
     virtual function void build_phase(uvm_phase phase);
 
         super.build_phase(phase);  
-        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
-            `uvm_fatal("[DRIVER]", "No interface!")
+    if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[MONITOR]", "No interface!")
         mon_analyser_port = new("mon_analyser_port", this);
 
     endfunction
