@@ -90,6 +90,19 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
+        // DEC
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            item.control = 15'b000_0000_0000_1000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [DEC]: ", i + 1, 10), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+        
+
 
     endtask
 
