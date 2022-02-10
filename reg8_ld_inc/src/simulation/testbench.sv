@@ -29,6 +29,29 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item
 
+class generator extends uvm_sequence;
+
+    `uvm_object_utils(generator)
+
+    function new(string name = "generator");
+        super.new(name);        
+    endfunction //new()
+
+    virtual task body();
+
+        for(int i = 0; i < 3; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+            item.randomize();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d create", i + 1, 3), UVM_LOW)
+            item.print();
+            finish_item(item);
+        end
+
+    endtask
+
+endclass //generator extends uvm_generator
+
 class driver extends uvm_driver#(register_item);
     
     `uvm_component_utils(test)
