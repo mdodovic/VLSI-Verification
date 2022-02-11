@@ -66,8 +66,8 @@ class driver extends uvm_driver #(register_item);
 
     `uvm_component_utils(driver)
 
-    function new(string name = "driver");
-        super.new(name);
+    function new(string name = "driver", uvm_component parent = null);
+        super.new(name, parent);
     endfunction //new()
 
     virtual register_if vif;
@@ -103,8 +103,8 @@ class monitor extends uvm_monitor;
 
     `uvm_component_utils(monitor)
 
-    function new(string name = "monitor");
-        super.new(name);
+    function new(string name = "monitor", uvm_component parent = null);
+        super.new(name, parent);
     endfunction //new()
 
     virtual register_if vif;
@@ -145,8 +145,8 @@ class agent extends uvm_agent;
 
     `uvm_component_utils(agent)
 
-    function new(string name = "agent");
-        super.new(name);
+    function new(string name = "agent", uvm_component parent = null);
+        super.new(name, parent);
     endfunction //new()
 
     driver d0;
@@ -171,8 +171,8 @@ class scoreboard extends uvm_scoreboard;
 
     `uvm_component_utils(scoreboard)
 
-    function new(string name = "scoreboard");
-        super.new(name);
+    function new(string name = "scoreboard", uvm_component parent = null);
+        super.new(name, parent);
     endfunction //new()
 
     uvm_analysis_imp#(register_item, scoreboard) mon_analysis_imp;
@@ -214,8 +214,8 @@ class env extends uvm_env;
 
     `uvm_component_utils(env)
 
-    function new(string name = "env");
-        super.new(name);
+    function new(string name = "env", uvm_component parent = null);
+        super.new(name, parent);
     endfunction //new()
 
     agent a0;
@@ -238,8 +238,8 @@ class test extends uvm_test;
 
     `uvm_component_utils(test)
 
-    function new(string name = "test");
-        super.new(name);
+    function new(string name = "test", uvm_component parent = null);
+        super.new(name, parent);
     endfunction //new()
 
     env e0;
