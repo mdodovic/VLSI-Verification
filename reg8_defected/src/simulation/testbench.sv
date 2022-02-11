@@ -167,6 +167,51 @@ class agent extends uvm_agent;
 
 endclass //agent extends uvm_agent
 
+class scoreboard extends uvm_scoreboard;
+
+    `uvm_component_utils(scoreboard)
+
+    function new(string name = "scoreboard");
+        super.new(name);
+    endfunction //new()
+
+    uvm_analysis_imp#(register_item, scoreboard) mon_analysis_imp;
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        mon_analysis_imp = new("mon_analysis_imp", this);
+    endfunction 
+
+    bit [7:0] reg_out = 8'h00;
+    bit msb = 1'b0;
+    bit lsb = 1'b0;
+
+    virtual function void write(register_item item);
+
+        if((reg_out == item.parallel_output) && (msb == item.serial_output_msb) && (lsb == item.serial_output_lsb))
+            `uvm_info("[SCOREBOARD]", $sformatf("PASS!\nexpected {msb = %1b, out = %8b, lsb = %1b} \n
+                                                        == got   {msb = %1b, out = %8b, lsb = %1b}",
+            msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
+            ), UVM_LOW)
+        else 
+            `uvm_error("[SCOREBOARD]", $sformatf("ERROR!\nexpected {msb = %1b, out = %8b, lsb = %1b} \n
+                                                          != got   {msb = %1b, out = %8b, lsb = %1b}",
+            msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
+            ))
+
+        msb = 1'b0;
+        lsb = 1'b0;
+
+        if(item.control[0]) begin
+            reg_out = 8'h00;
+        end else if(item.control[1]) begin
+            reg_out = item.parallel_input;
+        end
+
+    endfunction
+
+endclass //scoreboard extends uvm_scoreboard
+
 
 interface register_if (
     input bit clk
