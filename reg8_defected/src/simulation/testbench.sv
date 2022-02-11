@@ -142,6 +142,45 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            // item.parallel_input = 8'hFC;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+        // INC
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0100;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [INC]", i + 1, 10), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
 
     endtask
 
@@ -274,11 +313,11 @@ class scoreboard extends uvm_scoreboard;
     virtual function void write(register_item item);
 
         if((reg_out == item.parallel_output) && (msb == item.serial_output_msb) && (lsb == item.serial_output_lsb))
-            `uvm_info("[SCOREBOARD]", $sformatf("PASS! \n expected {msb = %1b, out = %8b, lsb = %1b} \n == got  {msb = %1b, out = %8b, lsb = %1b}",
+            `uvm_info("[SCOREBOARD]", $sformatf("PASS! \n expected {msb = %1b, out = %8b, lsb = %1b} \n == got   {msb = %1b, out = %8b, lsb = %1b}",
             msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
             ), UVM_LOW)
         else 
-            `uvm_error("[SCOREBOARD]", $sformatf("ERROR!\nexpected {msb = %1b, out = %8b, lsb = %1b} \n != got  {msb = %1b, out = %8b, lsb = %1b}",
+            `uvm_error("[SCOREBOARD]", $sformatf("ERROR!\n expected {msb = %1b, out = %8b, lsb = %1b} \n != got   {msb = %1b, out = %8b, lsb = %1b}",
             msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
             ))
 
@@ -286,9 +325,17 @@ class scoreboard extends uvm_scoreboard;
         lsb = 1'b0;
 
         if(item.control[0]) begin
+            // clear
             reg_out = 8'h00;
         end else if(item.control[1]) begin
+            // load
             reg_out = item.parallel_input;
+        end else if(item.control[2]) begin
+            // inc
+            {msb, reg_out} = reg_out + 1'b1;
+        end else if(item.control[3]) begin
+            // dec
+            {msb, reg_out} = reg_out - 1'b1;
         end
 
     endfunction
