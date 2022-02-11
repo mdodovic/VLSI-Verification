@@ -45,7 +45,7 @@ class generator extends uvm_sequence;
     virtual task body();
 
         // LOAD
-        for(int i = 0; i < 10; i++) begin
+        for(int i = 0; i < 3; i++) begin
             register_item item = register_item::type_id::create("item");
             start_item(item);
 
@@ -57,6 +57,21 @@ class generator extends uvm_sequence;
 
             finish_item(item);
         end
+
+        // empty clock
+        for(int i = 0; i < 2; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 2), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
 
     endtask
 
