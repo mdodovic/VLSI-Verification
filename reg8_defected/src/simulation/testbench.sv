@@ -45,7 +45,7 @@ class generator extends uvm_sequence;
     virtual task body();
 
         // LOAD
-        for(int i = 0; i < 3; i++) begin
+        for(int i = 0; i < 10; i++) begin
             register_item item = register_item::type_id::create("item");
             start_item(item);
 
@@ -189,11 +189,11 @@ class scoreboard extends uvm_scoreboard;
     virtual function void write(register_item item);
 
         if((reg_out == item.parallel_output) && (msb == item.serial_output_msb) && (lsb == item.serial_output_lsb))
-            `uvm_info("[SCOREBOARD]", $sformatf("PASS! \n expected {msb = %1b, out = %8b, lsb = %1b} \n == got   {msb = %1b, out = %8b, lsb = %1b}",
+            `uvm_info("[SCOREBOARD]", $sformatf("PASS! \n expected {msb = %1b, out = %8b, lsb = %1b} \n == got  {msb = %1b, out = %8b, lsb = %1b}",
             msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
             ), UVM_LOW)
         else 
-            `uvm_error("[SCOREBOARD]", $sformatf("ERROR!\nexpected {msb = %1b, out = %8b, lsb = %1b} \n != got   {msb = %1b, out = %8b, lsb = %1b}",
+            `uvm_error("[SCOREBOARD]", $sformatf("ERROR!\nexpected {msb = %1b, out = %8b, lsb = %1b} \n != got  {msb = %1b, out = %8b, lsb = %1b}",
             msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
             ))
 
@@ -295,6 +295,7 @@ module testbench;
     );
 
     register dut_impl(
+        .clk (clk),
         .rst_n (dut_if.rst_n),
         .control (dut_if.control),
         .serial_input_lsb (dut_if.serial_input_lsb),
