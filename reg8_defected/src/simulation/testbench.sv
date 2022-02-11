@@ -141,6 +141,32 @@ class monitor extends uvm_monitor;
 
 endclass //monitor extends uvm_monitor 
 
+class agent extends uvm_agent;
+
+    `uvm_component_utils(agent)
+
+    function new(string name = "agent");
+        super.new(name);
+    endfunction //new()
+
+    driver d0;
+    monitor m0;
+    uvm_sequencer#(register_item) s0;
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        d0 = driver::type_id::create("d0", this);
+        m0 = monitor::type_id::create("m0", this);
+        s0 = uvm_sequencer#(register_item)::type_id::create("s0", this);
+    endfunction 
+
+    virtual function void connect_phase(uvm_phase phase);
+        super.connect_phase(phase);
+        d0.seq_item_port.connect(s0.seq_item_export);
+    endfunction
+
+endclass //agent extends uvm_agent
+
 
 interface register_if (
     input bit clk
