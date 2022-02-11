@@ -436,98 +436,52 @@ class scoreboard extends uvm_scoreboard;
         msb = 1'b0;
         lsb = 1'b0;
 
-
         if(item.control[0]) begin
-            // CLEAR
-            lsb = 1'b0;
-            msb = 1'b0;
+            // clean
             reg_output = 8'h00;
         end else if(item.control[1]) begin
-            // LOAD
-            lsb = 1'b0;
-            msb = 1'b0;
-            reg_output = item.parallel_input;            
+            // load
+            reg_output = item.parallel_input;
         end else if(item.control[2]) begin
-            // INC
-            if(reg_output == 8'hFF) 
-                msb = 1'b1;
-            else 
-                msb = 1'b0;
-            lsb = 1'b0;
-            reg_output = reg_output + 1'b1;
+            // inc
+            {msb, reg_output} = reg_output + 1'b1;
         end else if(item.control[3]) begin
-            // DEC
-            if(reg_output == 8'h00) 
-                msb = 1'b1;
-            else 
-                msb = 1'b0;
-            lsb = 1'b0;
-            reg_output = reg_output - 1'b1;
+            // dec
+            {msb, reg_output} = reg_output - 1'b1;
         end else if(item.control[4]) begin
-            // ADD
+            // add
             {msb, reg_output} = reg_output + item.parallel_input;
         end else if(item.control[5]) begin
-            // SUB
+            // sub
             {msb, reg_output} = reg_output - item.parallel_input;
         end else if(item.control[6]) begin
-            // INVERT
+            // invert
             reg_output = reg_output ^ 8'hFF;
         end else if(item.control[7]) begin
-            // SERIAL_INPUT_LSB - SHIFT LEFT
+            // serial input lsb
             {msb, reg_output} = {reg_output, item.serial_input_lsb};
         end else if(item.control[8]) begin
-            // SERIAL_INPUT_MSB - SHIFT RIGHT
+            // serial input msb
             {reg_output, lsb} = {item.serial_input_msb, reg_output};
         end else if(item.control[9]) begin
-            // SHIFT_LOGICAL_LEFT
-            bit [7:0] temp;
-            msb = reg_output[7];
-            lsb = 1'b0;
-            temp = 8'h00;
-            temp = reg_output;
-            for (int i = 1; i < 8; i++) begin
-                reg_output[i] = temp[i-1];
-            end
-            reg_output[0] = 1'b0;
+            // shift logical left
+            {msb, reg_output} = {reg_output, 1'b0};
         end else if(item.control[10]) begin
-            // SHIFT_LOGICAL_RIGHT
-            lsb = reg_output[0];
-            msb = 1'b0;
-
-            reg_output = reg_output / 2;
-            reg_output[7] = 1'b0;
+            // shift logical right
+            {reg_output, lsb} = {1'b0, reg_output};
         end else if(item.control[11]) begin
-            // SHIFT_ARITHMETIC_LEFT
-            bit [7:0] temp;
-            msb = reg_output[7];
-            lsb = 1'b0;
-            temp = 8'h00;
-            temp = reg_output;
-            for (int i = 1; i < 8; i++) begin
-                reg_output[i] = temp[i-1];
-            end
-            reg_output[0] = 1'b0;
+            // shift arithmetic left
+            {msb, reg_output} = {reg_output, 1'b0};
         end else if(item.control[12]) begin
-            // SHIFT_ARITHMETIC_RIGHT
-            bit previous_msb = reg_output[7];
-            lsb = reg_output[0];
-            msb = 1'b0;
-            reg_output = reg_output / 2;
-            reg_output[7] = previous_msb;
+            // shift arithmetic right
+            {reg_output, lsb} = {reg_output[7], reg_output};
         end else if(item.control[13]) begin
-            // ROTATE_LEFT
-            msb = reg_output[7];
-            lsb = 1'b0;
-            reg_output = reg_output * 2;
-            reg_output[0] = msb;
+            // rotate left
+            {msb, reg_output} = {reg_output, reg_output[7]};
         end else if(item.control[14]) begin
-            // ROTATE_RIGHT
-            lsb = reg_output[0];
-            msb = 1'b0;
-            reg_output = reg_output / 2;
-            reg_output[7] = lsb;
-
-        end 
+            // rotate right
+            {reg_output, lsb} = {reg_output[0], reg_output};
+        end
 
     endfunction
 
