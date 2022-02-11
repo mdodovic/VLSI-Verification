@@ -34,7 +34,7 @@ class register_item extends uvm_sequence_item;
 
 endclass //register_item extends uvm_sequence_item
 
-class generator extends uvm_generator;
+class generator extends uvm_sequence;
 
     `uvm_object_utils(generator)
 
@@ -233,7 +233,7 @@ class env extends uvm_env;
         super.connect_phase(phase);
         a0.m0.mon_analysis_port.connect(sb0.mon_analysis_imp);
     endfunction
-    
+
 endclass //env extends uvm_env
 
 class test extends uvm_test;
