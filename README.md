@@ -9,7 +9,11 @@ The verification test of this component has covered:
 
  - single invoke of all operations (appropriate control bit is set; every operation has its own control bit written next to operation bellow):
 
-    CLEAR[0]:
+    CLEAR[0]: FAIL! Clean do not load value 8'h00, instead it loads value 8'h01.
+    ```
+    # expected {msb = 0, out = 00000000, lsb = 0}
+    #  != got  {msb = 0, out = 00000001, lsb = 0}
+    ```
     LOAD[1]: PASS!
     INC[2]:
     DEC[3]:

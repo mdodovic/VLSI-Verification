@@ -72,6 +72,76 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
+        // CLEAN
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0001;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [CLEAN]", i + 1, 3), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            item.parallel_input = 8'hFF;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+        
+        // CLEAN
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0001;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [CLEAN]", i + 1, 3), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+ 
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
 
     endtask
 
