@@ -99,6 +99,47 @@ class driver extends uvm_driver #(register_item);
 
 endclass //driver extends uvm_driver #(register_item)
 
+class monitor extends uvm_monitor;
+
+    `uvm_component_utils(monitor)
+
+    function new(string name = "monitor");
+        super.new(name);
+    endfunction //new()
+
+    virtual register_if vif;
+    uvm_analysis_port #(register_item) mon_analysis_port;
+
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[MONITOR]", "No interface.")
+        mon_analysis_port = new("mon_analysis_port", this);
+    endfunction 
+
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);
+        @(posedge vif.clk);
+        forever begin
+            register_item item = register_item::type_id::create("item");
+            @(posedge vif.clk);
+
+            item.control = vif.control;
+            item.serial_input_lsb = vif.serial_input_lsb;
+            item.serial_input_msb = vif.serial_input_msb;
+            item.parallel_input = vif.parallel_input;
+            item.serial_output_lsb = vif.serial_output_lsb;
+	        item.serial_output_msb = vif.serial_output_msb;
+	        item.parallel_output = vif.parallel_output;
+
+            `uvm_info("[MONITOR]", $sformatf("%s", item.convert2str), UVM_LOW)
+
+            mon_analysis_port.write(item);
+        end
+
+    endtask
+
+endclass //monitor extends uvm_monitor 
 
 
 interface register_if (
