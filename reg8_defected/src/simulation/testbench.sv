@@ -214,9 +214,9 @@ endclass //scoreboard extends uvm_scoreboard
 
 class env extends uvm_env;
 
-    `uvm_component_utils(scoreboard)
+    `uvm_component_utils(env)
 
-    function new(string name = "scoreboard");
+    function new(string name = "env");
         super.new(name);
     endfunction //new()
 
