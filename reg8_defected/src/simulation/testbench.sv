@@ -62,6 +62,44 @@ class generator extends uvm_generator;
 
 endclass //generator extends uvm_generator
 
+class driver extends uvm_driver #(register_item);
+
+    `uvm_component_utils(driver)
+
+    function new(string name = "driver");
+        super.new(name);
+    endfunction //new()
+
+    virtual register_if vif;
+    
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
+            `uvm_fatal("[DRIVER]", "No interface.")
+    endfunction 
+
+    virtual task run_phase(uvm_phase phase);
+        super.run_phase(phase);
+        @(posedge vif.clk);
+        forever begin
+            register_item item;
+            seq_item_port.get_next_item(item)
+
+            vif.control <= item.control;
+            vif.serial_input_lsb <= item.serial_input_lsb;
+            vif.serial_input_msb <= item.serial_input_msb;
+            vif.parallel_input <= item.parallel_input;
+
+            `uvm_info("[DRIVER]", $sformatf("%s", item.convert2str()), UVM_LOW)
+
+            @(posedge vif.clk);
+            seq_item_port.item_done();
+        end
+    endtask
+
+endclass //driver extends uvm_driver #(register_item)
+
+
 
 interface register_if (
     input bit clk
