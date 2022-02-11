@@ -1,2 +1,2 @@
-src/simulation/modules/dut.vp
+src/simulation/modules/register.vp
 src/simulation/testbench.sv
