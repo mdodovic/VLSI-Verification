@@ -7,17 +7,17 @@ class register_item extends uvm_sequence_item;
 	rand bit serial_input_lsb;
 	rand bit serial_input_msb;
 	rand bit [7:0] parallel_input;
-	
-    bit serial_output_lsb;
+
+	bit serial_output_lsb;
 	bit serial_output_msb;
 	bit [7:0] parallel_output;
 
     `uvm_object_utils_begin(register_item)
-        `uvm_field_int(control, UVM_DEFAULT | UVM_BIN)
-        `uvm_field_int(serial_input_lsb, UVM_ALL_ON | UVM_BIN)
-        `uvm_field_int(serial_input_msb, UVM_ALL_ON | UVM_BIN)
-        `uvm_field_int(parallel_input, UVM_ALL_ON | UVM_BIN)
-        `uvm_field_int(serial_output_lsb, UVM_NOPRINT)
+	    `uvm_field_int(control, UVM_DEFAULT | UVM_BIN)
+	    `uvm_field_int(serial_input_lsb, UVM_ALL_ON | UVM_BIN)
+	    `uvm_field_int(serial_input_msb, UVM_ALL_ON | UVM_BIN)
+	    `uvm_field_int(parallel_input, UVM_ALL_ON | UVM_BIN)
+	    `uvm_field_int(serial_output_lsb, UVM_NOPRINT)
 	    `uvm_field_int(serial_output_msb, UVM_NOPRINT)
 	    `uvm_field_int(parallel_output, UVM_NOPRINT)
     `uvm_object_utils_end
@@ -27,9 +27,8 @@ class register_item extends uvm_sequence_item;
     endfunction //new()
 
     virtual function string convert2str();
-        return $sformatf("Item: control = %15b, input_lsb = %1b, input_msb = %1b, parallel_input = %8b, output_lsb = %1b, input_msb = %1b, parallel_input = %8b",
-            control, serial_input_lsb, serial_input_msb, parallel_input, serial_output_lsb, serial_output_msb, parallel_output
-        );
+        return $sformatf("Item: control = %15b, input_msb = %1b, input = %8b, input_lsb = %1b, output_msb = %1b, output = %8b, output_lsb = %1b",
+            control, serial_input_msb, parallel_input, serial_input_lsb, serial_output_msb, parallel_output, serial_output_lsb);
     endfunction
 
 endclass //register_item extends uvm_sequence_item
@@ -52,7 +51,7 @@ class generator extends uvm_sequence;
             item.randomize();
             item.control = 15'b000_0000_0000_0010;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [LOAD]", i + 1, 3), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 3), UVM_LOW)
             item.print();
 
             finish_item(item);
@@ -66,7 +65,7 @@ class generator extends uvm_sequence;
             item.randomize();
             item.control = 15'b000_0000_0000_0000;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 2), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 2), UVM_LOW)
             item.print();
 
             finish_item(item);
@@ -80,7 +79,7 @@ class generator extends uvm_sequence;
             item.randomize();
             item.control = 15'b000_0000_0000_0001;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [CLEAN]", i + 1, 3), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [CLEAN]", i + 1, 1), UVM_LOW)
             item.print();
 
             finish_item(item);
@@ -94,7 +93,7 @@ class generator extends uvm_sequence;
             item.randomize();
             item.control = 15'b000_0000_0000_0000;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 1), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
             item.print();
 
             finish_item(item);
@@ -107,54 +106,13 @@ class generator extends uvm_sequence;
 
             item.randomize();
             item.control = 15'b000_0000_0000_0010;
-            item.parallel_input = 8'hFF;
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [LOAD]", i + 1, 1), UVM_LOW)
-            item.print();
 
-            finish_item(item);
-        end
-        
-        // CLEAN
-        for(int i = 0; i < 1; i++) begin
-            register_item item = register_item::type_id::create("item");
-            start_item(item);
-
-            item.randomize();
-            item.control = 15'b000_0000_0000_0001;
-
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [CLEAN]", i + 1, 3), UVM_LOW)
-            item.print();
-
-            finish_item(item);
-        end
- 
-        // empty clock
-        for(int i = 0; i < 1; i++) begin
-            register_item item = register_item::type_id::create("item");
-            start_item(item);
-
-            item.randomize();
-            item.control = 15'b000_0000_0000_0000;
-
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 1), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
             item.print();
 
             finish_item(item);
         end
 
-        // LOAD
-        for(int i = 0; i < 1; i++) begin
-            register_item item = register_item::type_id::create("item");
-            start_item(item);
-
-            item.randomize();
-            item.control = 15'b000_0000_0000_0010;
-            // item.parallel_input = 8'hFC;
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [LOAD]", i + 1, 1), UVM_LOW)
-            item.print();
-
-            finish_item(item);
-        end
         // INC
         for(int i = 0; i < 10; i++) begin
             register_item item = register_item::type_id::create("item");
@@ -162,11 +120,13 @@ class generator extends uvm_sequence;
 
             item.randomize();
             item.control = 15'b000_0000_0000_0100;
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [INC]", i + 1, 10), UVM_LOW)
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INC]", i + 1, 10), UVM_LOW)
             item.print();
 
             finish_item(item);
         end
+
         // empty clock
         for(int i = 0; i < 1; i++) begin
             register_item item = register_item::type_id::create("item");
@@ -175,18 +135,17 @@ class generator extends uvm_sequence;
             item.randomize();
             item.control = 15'b000_0000_0000_0000;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d created [EMPTY]", i + 1, 1), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
             item.print();
 
             finish_item(item);
         end
 
-
     endtask
 
-endclass //generator extends uvm_generator
+endclass //generator extends uvm_sequence
 
-class driver extends uvm_driver #(register_item);
+class driver extends uvm_driver#(register_item);
 
     `uvm_component_utils(driver)
 
@@ -195,12 +154,12 @@ class driver extends uvm_driver #(register_item);
     endfunction //new()
 
     virtual register_if vif;
-    
+
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
-            `uvm_fatal("[DRIVER]", "No interface.")
-    endfunction 
+            `uvm_fatal("[DRIVER]", "No interface!")
+    endfunction
 
     virtual task run_phase(uvm_phase phase);
         super.run_phase(phase);
@@ -213,7 +172,6 @@ class driver extends uvm_driver #(register_item);
             vif.serial_input_lsb <= item.serial_input_lsb;
             vif.serial_input_msb <= item.serial_input_msb;
             vif.parallel_input <= item.parallel_input;
-
             `uvm_info("[DRIVER]", $sformatf("%s", item.convert2str()), UVM_LOW)
 
             @(posedge vif.clk);
@@ -221,7 +179,7 @@ class driver extends uvm_driver #(register_item);
         end
     endtask
 
-endclass //driver extends uvm_driver #(register_item)
+endclass //driver extends uvm_driver#(register_item)    
 
 class monitor extends uvm_monitor;
 
@@ -232,14 +190,14 @@ class monitor extends uvm_monitor;
     endfunction //new()
 
     virtual register_if vif;
-    uvm_analysis_port #(register_item) mon_analysis_port;
+    uvm_analysis_port#(register_item) mon_analysis_port;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
-            `uvm_fatal("[MONITOR]", "No interface.")
+            `uvm_fatal("[MONITOR]", "No interface!")
         mon_analysis_port = new("mon_analysis_port", this);
-    endfunction 
+    endfunction
 
     virtual task run_phase(uvm_phase phase);
         super.run_phase(phase);
@@ -253,17 +211,15 @@ class monitor extends uvm_monitor;
             item.serial_input_msb = vif.serial_input_msb;
             item.parallel_input = vif.parallel_input;
             item.serial_output_lsb = vif.serial_output_lsb;
-	        item.serial_output_msb = vif.serial_output_msb;
-	        item.parallel_output = vif.parallel_output;
-
-            `uvm_info("[MONITOR]", $sformatf("%s", item.convert2str), UVM_LOW)
+            item.serial_output_msb = vif.serial_output_msb;
+            item.parallel_output = vif.parallel_output;
+            `uvm_info("[MONITOR]", $sformatf("%s", item.convert2str()), UVM_LOW)
 
             mon_analysis_port.write(item);
         end
-
     endtask
 
-endclass //monitor extends uvm_monitor 
+endclass //monitor extends uvm_monitor
 
 class agent extends uvm_agent;
 
@@ -276,13 +232,13 @@ class agent extends uvm_agent;
     driver d0;
     monitor m0;
     uvm_sequencer#(register_item) s0;
-
+    
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         d0 = driver::type_id::create("d0", this);
         m0 = monitor::type_id::create("m0", this);
-        s0 = uvm_sequencer#(register_item)::type_id::create("s0", this);
-    endfunction 
+        s0 = uvm_sequencer#(register_item)::type_id::create("s0", this);        
+    endfunction
 
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
@@ -304,39 +260,69 @@ class scoreboard extends uvm_scoreboard;
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         mon_analysis_imp = new("mon_analysis_imp", this);
-    endfunction 
+    endfunction
 
-    bit [7:0] reg_out = 8'h00;
     bit msb = 1'b0;
     bit lsb = 1'b0;
+    bit [7:0] reg_output = 8'h00;
 
     virtual function void write(register_item item);
-
-        if((reg_out == item.parallel_output) && (msb == item.serial_output_msb) && (lsb == item.serial_output_lsb))
-            `uvm_info("[SCOREBOARD]", $sformatf("PASS! \n expected {msb = %1b, out = %8b, lsb = %1b} \n == got   {msb = %1b, out = %8b, lsb = %1b}",
-            msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
-            ), UVM_LOW)
-        else 
-            `uvm_error("[SCOREBOARD]", $sformatf("ERROR!\n expected {msb = %1b, out = %8b, lsb = %1b} \n != got   {msb = %1b, out = %8b, lsb = %1b}",
-            msb, reg_out, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb
-            ))
+        if((msb == item.serial_output_msb) && (reg_output == item.parallel_output) && (lsb == item.serial_output_lsb))
+            `uvm_info("[SCOREBOARD]", $sformatf("PASS!\n expect {msb = %1b, output = %8b, lsb = %1b}\n == got {msb = %1b, output = %8b, lsb = %1b} ",
+                msb, reg_output, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb), UVM_LOW)
+        else
+            `uvm_error("[SCOREBOARD]", $sformatf("FAIL!\n expect {msb = %1b, output = %8b, lsb = %1b}\n == got {msb = %1b, output = %8b, lsb = %1b} ",
+                msb, reg_output, lsb, item.serial_output_msb, item.parallel_output, item.serial_output_lsb))            
 
         msb = 1'b0;
         lsb = 1'b0;
 
         if(item.control[0]) begin
             // clear
-            reg_out = 8'h00;
+            reg_output = 8'h00;
         end else if(item.control[1]) begin
             // load
-            reg_out = item.parallel_input;
+            reg_output = item.parallel_input;
         end else if(item.control[2]) begin
             // inc
-            {msb, reg_out} = reg_out + 1'b1;
+            {msb, reg_output} = reg_output + 1'b1;
         end else if(item.control[3]) begin
             // dec
-            {msb, reg_out} = reg_out - 1'b1;
-        end
+            {msb, reg_output} = reg_output - 1'b1;
+        end else if(item.control[4]) begin
+            // add
+            {msb, reg_output} = reg_output + item.parallel_input;
+        end else if(item.control[5]) begin
+            // sub
+            {msb, reg_output} = reg_output - item.parallel_input;
+        end else if(item.control[6]) begin
+            // invert
+            reg_output = reg_output ^ 8'hFF;
+        end else if(item.control[7]) begin
+            // serial_input_lsb
+            {msb, reg_output} = {reg_output, item.serial_input_lsb};
+        end else if(item.control[8]) begin
+            // serial_input_msb
+            {reg_output, lsb} = {item.serial_input_msb, reg_output};
+        end else if(item.control[9]) begin
+            // shift logical left
+            {msb, reg_output} = {reg_output, 1'b0};
+        end else if(item.control[10]) begin
+            // shift logical right
+            {reg_output, lsb} = {1'b0, reg_output};
+        end else if(item.control[11]) begin
+            // shift arithmetic left
+            {msb, reg_output} = {reg_output, 1'b0};
+        end else if(item.control[12]) begin
+            // shift arithmetic right
+            {reg_output, lsb} = {reg_output[7], reg_output};
+        end else if(item.control[13]) begin
+            // rotate left
+            {msb, reg_output} = {reg_output, reg_output[7]};
+        end else if(item.control[14]) begin
+            // rotate right
+            {reg_output, lsb} = {reg_output[0], reg_output};
+        end   
 
     endfunction
 
@@ -357,7 +343,7 @@ class env extends uvm_env;
         super.build_phase(phase);
         a0 = agent::type_id::create("a0", this);
         sb0 = scoreboard::type_id::create("sb0", this);
-    endfunction 
+    endfunction
 
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
@@ -381,15 +367,15 @@ class test extends uvm_test;
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if(!uvm_config_db#(virtual register_if)::get(this, "", "register_vif", vif))
-            `uvm_fatal("[TEST]", "No interface.")
+            `uvm_fatal("[TEST]", "No interface!")
         e0 = env::type_id::create("e0", this);
         g0 = generator::type_id::create("g0", this);
-    endfunction 
+    endfunction
 
     virtual function void end_of_elaboration_phase(uvm_phase phase);
         uvm_top.print_topology();
     endfunction
-    
+
     virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
@@ -403,7 +389,7 @@ class test extends uvm_test;
 
 endclass //test extends uvm_test
 
-interface register_if (
+interface register_if(
     input bit clk
 );
 
@@ -419,14 +405,14 @@ interface register_if (
 endinterface //register_if
 
 module testbench;
-    
+
     reg clk;
     
     register_if dut_if(
         .clk (clk)
     );
 
-    register dut_impl(
+    register dut_inst(
         .clk (clk),
         .rst_n (dut_if.rst_n),
         .control (dut_if.control),
@@ -441,7 +427,7 @@ module testbench;
     initial begin
         clk = 0;
         forever begin
-            #10; clk = ~clk;
+            #10 clk = ~clk;
         end
     end
 
