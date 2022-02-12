@@ -57,9 +57,19 @@ The verification test of this component has covered:
       
       Add operation functionality: add out value and value from input. If there is any carry this will be stored in msb.
       
-      SUB[5]:
-
+      SUB[5]: FAIL!
       
+      Sub operation functionality: sub out value with value from input. If there is any borrow this will be stored in msb. Instead, it add out value and value from input. Two successive blocks for representation:
+      ```
+      input = 00111011
+      #  expect {msb = 0, output = 01000010, lsb = 0} // initial state
+      #  == got {msb = 0, output = 01000010, lsb = 0} // initial state
+      ```
+      ```
+      #  expect {msb = 0, output = 00000111, lsb = 0} // output = output - input
+      #  == got {msb = 0, output = 01111101, lsb = 0} // output = output + input
+      ```
+
       INVERT[6]:
       SERIAL_INPUT_LSB[7]:
       SERIAL_INPUT_MSB[8]:
