@@ -117,8 +117,15 @@ The verification test of this component has covered:
 
       Shift logical left operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's least significant bit to 1'b0. 
 
-      SHIFT_LOGICAL_RIGHT[10]:
-      SHIFT_ARITHMETIC_LEFT[11]:
+      SHIFT_LOGICAL_RIGHT[10]: PASS!
+
+      Shift logical right operation functionality: shift out for 1 place right (lsb will become the least significant bit of out value) and set out's most significant bit to 1'b0. 
+
+      SHIFT_ARITHMETIC_LEFT[11]: PASS!
+
+      Shift arithmetic left operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's least significant bit to 1'b0. 
+
+
       SHIFT_ARITHMETIC_RIGHT[12]:
       ROTATE_LEFT[13]:
       ROTATE_RIGHT[14]:
