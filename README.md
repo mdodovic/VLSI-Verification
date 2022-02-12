@@ -46,11 +46,11 @@ The verification test of this component has covered:
       ```
       ```
       #  expect {msb = 0, output = 11011111, lsb = 0} // - 1
-      #  == got {msb = 0, output = 11100001, lsb = 0} // + 1
+      #  != got {msb = 0, output = 11100001, lsb = 0} // + 1
       ```
       ```
       #  expect {msb = 0, output = 11011110, lsb = 0} // - 2
-      #  == got {msb = 0, output = 11100010, lsb = 0} // + 2
+      #  != got {msb = 0, output = 11100010, lsb = 0} // + 2
       ```
 
       ADD[4]: PASS!
@@ -67,7 +67,7 @@ The verification test of this component has covered:
       ```
       ```
       #  expect {msb = 0, output = 00000111, lsb = 0} // output = output - input
-      #  == got {msb = 0, output = 01111101, lsb = 0} // output = output + input
+      #  != got {msb = 0, output = 01111101, lsb = 0} // output = output + input
       ```
 
       INVERT[6]: FAIL!
@@ -79,7 +79,7 @@ The verification test of this component has covered:
       ```
       ```
       #  expect {msb = 0, output = 10111110, lsb = 0} // inverted
-      #  == got {msb = 0, output = 01000001, lsb = 0} // same
+      #  != got {msb = 0, output = 01000001, lsb = 0} // same
       ```
       ```
       #  expect {msb = 0, output = 01000001, lsb = 0} // inverted (double invert)
@@ -97,16 +97,16 @@ The verification test of this component has covered:
       ```
       ```
       #  expect {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit
-      #  == got {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit 
+      #  != got {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit 
       ```
-            Second situation (```input lsb = 1'b0```), two successive blocks for representation:
+      Second situation (```input lsb = 1'b0```), two successive blocks for representation:
       ```
       #  expect {msb = 0, output = 10100111, lsb = 0} // initial state
       #  == got {msb = 0, output = 10100111, lsb = 0} // initial state
       ```
       ```
       #  expect {msb = 1, output = 01001110, lsb = 0} // shift + set 0 to the out's least significant bit
-      #  == got {msb = 1, output = 01001111, lsb = 0} // shift + set 1 to the out's least significant bit
+      #  != got {msb = 1, output = 01001111, lsb = 0} // shift + set 1 to the out's least significant bit
       ```
 
       SERIAL_INPUT_MSB[8]: PASS!
@@ -125,7 +125,52 @@ The verification test of this component has covered:
 
       Shift arithmetic left operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's least significant bit to 1'b0. 
 
+      SHIFT_ARITHMETIC_RIGHT[12]: FAIL
 
-      SHIFT_ARITHMETIC_RIGHT[12]:
+      Shift arithmetic right operation functionality: shift out for 1 place right (lsb will become the least significant bit of out value) and set out's most significant bit to the sign of the out value (copy out's most significant bit). Instead, it properly shifts the out value but fill the out's least significant bit with the lsb input value. 
+      
+      First situation (```input lsb = 1'b0```), three successive blocks for representation:
+      ```
+      #  expect {msb = 0, output = 10000000, lsb = 0} // initial state
+      #  == got {msb = 0, output = 10000000, lsb = 0} // initial state
+      ```
+      ```
+      #  expect {msb = 0, output = 11000000, lsb = 0} // shift + set sign (1'b1) to the out's least significant bit
+      #  != got {msb = 0, output = 01000000, lsb = 0} // shift + set input lsb (1'b0) to the out's least significant bit 
+      ```
+      ```
+      #  expect {msb = 0, output = 11100000, lsb = 0} // shift + set sign (1'b1) to the out's least significant bit
+      #  != got {msb = 0, output = 00100000, lsb = 0} // shift + set input lsb (1'b0) to the out's least significant bit 
+      ```
+      Second situation (```input lsb = 1'b1```), three successive blocks for representation:
+      ```
+      #  expect {msb = 0, output = 01000000, lsb = 0} // initial state
+      #  == got {msb = 0, output = 01000000, lsb = 0} // initial state
+      ```
+      ```
+      #  expect {msb = 0, output = 00100000, lsb = 0} // shift + set sign (1'b0) to the out's least significant bit
+      #  != got {msb = 0, output = 10100000, lsb = 0} // shift + set input lsb (1'b1) to the out's least significant bit 
+      ```
+      ```
+      #  expect {msb = 0, output = 00010000, lsb = 0} // shift + set sign (1'b0) to the out's least significant bit
+      #  != got {msb = 0, output = 11010000, lsb = 0} // shift + set input lsb (1'b1) to the out's least significant bit 
+      ```
+      Third situation (input lsb is written above the output), three successive blocks for representation:
+      ```
+      #  expect {msb = 0, output = 01000001, lsb = 0} // initial state
+      #  == got {msb = 0, output = 01000001, lsb = 0} // initial state
+      ```
+      ```
+      input_lsb = 1
+      #  expect {msb = 0, output = 00100000, lsb = 1} // shift + set sign (1'b0) to the out's least significant bit
+      #  != got {msb = 0, output = 10100000, lsb = 1} // shift + set input lsb (1'b1) to the out's least significant bit 
+      ```
+      ```
+      input_lsb = 0
+      #  expect {msb = 0, output = 00010000, lsb = 0} // shift + set sign (1'b0) to the out's least significant bit
+      #  != got {msb = 0, output = 01010000, lsb = 0} // shift + set input lsb (1'b0) to the out's least significant bit 
+      ```
+
+
       ROTATE_LEFT[13]:
       ROTATE_RIGHT[14]:
