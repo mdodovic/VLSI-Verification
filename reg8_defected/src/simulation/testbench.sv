@@ -309,6 +309,63 @@ class generator extends uvm_sequence;
         //     finish_item(item);
         // end
 
+        // // LOAD
+        // for(int i = 0; i < 1; i++) begin
+        //     register_item item = register_item::type_id::create("item");
+        //     start_item(item);
+
+        //     item.randomize();
+        //     item.control = 15'b000_0000_0000_0010;
+        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+        //     item.print();
+
+        //     finish_item(item);
+        // end
+
+        // // serial input lsb
+        // for(int i = 0; i < 20; i++) begin
+        //     register_item item = register_item::type_id::create("item");
+        //     start_item(item);
+
+        //     item.randomize();
+        //     item.control = 15'b000_0000_1000_0000;
+        //     item.serial_input_lsb = 1'b1;
+
+        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
+        //     item.print();
+
+        //     finish_item(item);
+        // end
+
+        // // LOAD
+        // for(int i = 0; i < 1; i++) begin
+        //     register_item item = register_item::type_id::create("item");
+        //     start_item(item);
+
+        //     item.randomize();
+        //     item.control = 15'b000_0000_0000_0010;
+
+        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+        //     item.print();
+
+        //     finish_item(item);
+        // end
+
+        // // serial input lsb
+        // for(int i = 0; i < 20; i++) begin
+        //     register_item item = register_item::type_id::create("item");
+        //     start_item(item);
+
+        //     item.randomize();
+        //     item.control = 15'b000_0000_1000_0000;
+        //     item.serial_input_lsb = 1'b0;
+
+        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
+        //     item.print();
+
+        //     finish_item(item);
+        // end
+
         // LOAD
         for(int i = 0; i < 1; i++) begin
             register_item item = register_item::type_id::create("item");
@@ -322,16 +379,16 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
-        // serial input lsb
+        // serial input msb
         for(int i = 0; i < 20; i++) begin
             register_item item = register_item::type_id::create("item");
             start_item(item);
 
             item.randomize();
-            item.control = 15'b000_0000_1000_0000;
-            item.serial_input_lsb = 1'b1;
+            item.control = 15'b000_0001_0000_0000;
+            item.serial_input_msb = 1'b1;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT MSB]", i + 1, 20), UVM_LOW)
             item.print();
 
             finish_item(item);
@@ -351,20 +408,21 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
-        // serial input lsb
+        // serial input msb
         for(int i = 0; i < 20; i++) begin
             register_item item = register_item::type_id::create("item");
             start_item(item);
 
             item.randomize();
-            item.control = 15'b000_0000_1000_0000;
+            item.control = 15'b000_0001_0000_0000;
             item.serial_input_lsb = 1'b0;
 
-            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT MSB]", i + 1, 20), UVM_LOW)
             item.print();
 
             finish_item(item);
         end
+
 
     endtask
 

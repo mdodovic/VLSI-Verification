@@ -88,30 +88,31 @@ The verification test of this component has covered:
 
       SERIAL_INPUT_LSB[7]: FAIL!
 
-      Serial input lsb operation functionality: shift out for 1 place (msb will become the most significant bit of out value) and set out's least significant bit with given input lsb value. Instead, it properly shifts the out value but always fill the out's least significant bit with 1'b1. 
-      
+      Serial input LSB operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's least significant bit with given input lsb value. Instead, it properly shifts the out value but always fill the out's least significant bit with 1'b1. 
+
       First situation (```input lsb = 1'b1```), two successive blocks for representation:
-```
-#  expect {msb = 0, output = 10000011, lsb = 0} // initial state
-#  == got {msb = 0, output = 10000011, lsb = 0} // initial state
-```
-```
-#  expect {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit
-#  == got {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit 
-```
-      Second situation (```input lsb = 1'b0```), two successive blocks for representation:
-```
-#  expect {msb = 0, output = 10100111, lsb = 0} // initial state
-#  == got {msb = 0, output = 10100111, lsb = 0} // initial state
-```
-```
-#  expect {msb = 1, output = 01001110, lsb = 0} // shift + set 0 to the out's least significant bit
-#  == got {msb = 1, output = 01001111, lsb = 0} // shift + set 1 to the out's least significant bit
-```
+      ```
+      #  expect {msb = 0, output = 10000011, lsb = 0} // initial state
+      #  == got {msb = 0, output = 10000011, lsb = 0} // initial state
+      ```
+      ```
+      #  expect {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit
+      #  == got {msb = 1, output = 00000111, lsb = 0} // shift + set 1 to the out's least significant bit 
+      ```
+            Second situation (```input lsb = 1'b0```), two successive blocks for representation:
+      ```
+      #  expect {msb = 0, output = 10100111, lsb = 0} // initial state
+      #  == got {msb = 0, output = 10100111, lsb = 0} // initial state
+      ```
+      ```
+      #  expect {msb = 1, output = 01001110, lsb = 0} // shift + set 0 to the out's least significant bit
+      #  == got {msb = 1, output = 01001111, lsb = 0} // shift + set 1 to the out's least significant bit
+      ```
 
+      SERIAL_INPUT_MSB[8]: PASS!
 
-
-      SERIAL_INPUT_MSB[8]:
+      Serial input MSB operation functionality: shift out for 1 place right (lsb will become the least significant bit of out value) and set out's most significant bit with given input msb value. 
+      
       SHIFT_LOGICAL_LEFT[9]:
       SHIFT_LOGICAL_RIGHT[10]:
       SHIFT_ARITHMETIC_LEFT[11]:
