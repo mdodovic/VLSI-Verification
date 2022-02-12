@@ -267,6 +267,47 @@ class generator extends uvm_sequence;
             finish_item(item);
         end
 
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
+        // INVERT
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0100_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INVERT]", i + 1, 20), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
 
     endtask
 

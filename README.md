@@ -70,8 +70,25 @@ The verification test of this component has covered:
       #  == got {msb = 0, output = 01111101, lsb = 0} // output = output + input
       ```
 
-      INVERT[6]:
+      INVERT[6]: FAIL!
+
+      Invert operation functionality: invert out value. Instead, it leaves out as it was before operation. Three successive blocks for representation:
+      ```
+      #  expect {msb = 0, output = 01000001, lsb = 0}
+      #  == got {msb = 0, output = 01000001, lsb = 0}
+      ```
+      ```
+      #  expect {msb = 0, output = 10111110, lsb = 0}
+      #  == got {msb = 0, output = 01000001, lsb = 0}
+      ```
+      ```
+      #  expect {msb = 0, output = 01000001, lsb = 0}
+      #  == got {msb = 0, output = 01000001, lsb = 0}
+      ```
+
       SERIAL_INPUT_LSB[7]:
+
+
       SERIAL_INPUT_MSB[8]:
       SHIFT_LOGICAL_LEFT[9]:
       SHIFT_LOGICAL_RIGHT[10]:
