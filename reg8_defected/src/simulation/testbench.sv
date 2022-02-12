@@ -43,554 +43,554 @@ class generator extends uvm_sequence;
 
     virtual task body();
 
-        // // LOAD
-        // for(int i = 0; i < 3; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 3; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 3), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 3), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 2; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 2; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 2), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 2), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // CLEAN
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // CLEAN
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0001;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0001;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [CLEAN]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [CLEAN]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // INC
-        // for(int i = 0; i < 10; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // INC
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0100;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0100;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INC]", i + 1, 10), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INC]", i + 1, 10), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // DEC
-        // for(int i = 0; i < 10; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // DEC
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_1000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_1000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [DEC]", i + 1, 10), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [DEC]", i + 1, 10), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // ADD
-        // for(int i = 0; i < 10; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // ADD
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0001_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0001_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [ADD]", i + 1, 10), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [ADD]", i + 1, 10), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // SUB
-        // for(int i = 0; i < 10; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // SUB
+        for(int i = 0; i < 10; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0010_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0010_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SUB]", i + 1, 10), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SUB]", i + 1, 10), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // empty clock
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // empty clock
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [NOTHING]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // INVERT
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // INVERT
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0100_0000;
+            item.randomize();
+            item.control = 15'b000_0000_0100_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INVERT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [INVERT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // serial input lsb
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // serial input lsb
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_1000_0000;
-        //     item.serial_input_lsb = 1'b1;
+            item.randomize();
+            item.control = 15'b000_0000_1000_0000;
+            item.serial_input_lsb = 1'b1;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // serial input lsb
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // serial input lsb
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_1000_0000;
-        //     item.serial_input_lsb = 1'b0;
+            item.randomize();
+            item.control = 15'b000_0000_1000_0000;
+            item.serial_input_lsb = 1'b0;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT LSB]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // serial input msb
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // serial input msb
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0001_0000_0000;
-        //     item.serial_input_msb = 1'b1;
+            item.randomize();
+            item.control = 15'b000_0001_0000_0000;
+            item.serial_input_msb = 1'b1;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT MSB]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT MSB]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // serial input msb
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // serial input msb
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0001_0000_0000;
-        //     item.serial_input_lsb = 1'b0;
+            item.randomize();
+            item.control = 15'b000_0001_0000_0000;
+            item.serial_input_lsb = 1'b0;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT MSB]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SERIAL INPUT MSB]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // shift logical left
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // shift logical left
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0010_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0010_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT LOGICAL LEFT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT LOGICAL LEFT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // shift logical right
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // shift logical right
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0100_0000_0000;
+            item.randomize();
+            item.control = 15'b000_0100_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT LOGICAL RIGHT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT LOGICAL RIGHT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // shift arithmetic left
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // shift arithmetic left
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_1000_0000_0000;
+            item.randomize();
+            item.control = 15'b000_1000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC LEFT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC LEFT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // shift arithmetic right
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // shift arithmetic right
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b001_0000_0000_0000;
+            item.randomize();
+            item.control = 15'b001_0000_0000_0000;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC RIGHT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC RIGHT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
-        //     item.parallel_input = 8'b1000_0000;
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            item.parallel_input = 8'b1000_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // shift arithmetic right
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // shift arithmetic right
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b001_0000_0000_0000;
-        //     item.serial_input_lsb = 1'b0;
+            item.randomize();
+            item.control = 15'b001_0000_0000_0000;
+            item.serial_input_lsb = 1'b0;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC RIGHT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC RIGHT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // LOAD
-        // for(int i = 0; i < 1; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b000_0000_0000_0010;
-        //     item.parallel_input = 8'b0100_0000;
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
-        //     item.print();
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            item.parallel_input = 8'b0100_0000;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
-        // // shift arithmetic right
-        // for(int i = 0; i < 20; i++) begin
-        //     register_item item = register_item::type_id::create("item");
-        //     start_item(item);
+        // shift arithmetic right
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
 
-        //     item.randomize();
-        //     item.control = 15'b001_0000_0000_0000;
-        //     item.serial_input_lsb = 1'b1;
+            item.randomize();
+            item.control = 15'b001_0000_0000_0000;
+            item.serial_input_lsb = 1'b1;
 
-        //     `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC RIGHT]", i + 1, 20), UVM_LOW)
-        //     item.print();
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [SHIFT ARITHMETIC RIGHT]", i + 1, 20), UVM_LOW)
+            item.print();
 
-        //     finish_item(item);
-        // end
+            finish_item(item);
+        end
 
         // LOAD
         for(int i = 0; i < 1; i++) begin
@@ -614,6 +614,33 @@ class generator extends uvm_sequence;
             item.control = 15'b010_0000_0000_0000;
 
             `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [ROTATE LEFT]", i + 1, 20), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
+        // LOAD
+        for(int i = 0; i < 1; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b000_0000_0000_0010;
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [LOAD]", i + 1, 1), UVM_LOW)
+            item.print();
+
+            finish_item(item);
+        end
+
+        // rotate right
+        for(int i = 0; i < 20; i++) begin
+            register_item item = register_item::type_id::create("item");
+            start_item(item);
+
+            item.randomize();
+            item.control = 15'b100_0000_0000_0000;
+
+            `uvm_info("[GENERATOR]", $sformatf("Item %0d/%0d generated [ROTATE RIGHT]", i + 1, 20), UVM_LOW)
             item.print();
 
             finish_item(item);

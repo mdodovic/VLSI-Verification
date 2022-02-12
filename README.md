@@ -175,4 +175,6 @@ The verification test of this component has covered:
 
       Rotate left operation functionality: rotate out for 1 place left (msb will become the most significant bit of out value). 
 
-      ROTATE_RIGHT[14]:
+      ROTATE_RIGHT[14]: PASS!
+
+      Rotate right operation functionality: rotate out for 1 place right (lsb will become the least significant bit of out value). 
