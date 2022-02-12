@@ -171,6 +171,8 @@ The verification test of this component has covered:
       #  != got {msb = 0, output = 01010000, lsb = 0} // shift + set input lsb (1'b0) to the out's least significant bit 
       ```
 
+      ROTATE_LEFT[13]: PASS!
 
-      ROTATE_LEFT[13]:
+      Rotate left operation functionality: rotate out for 1 place left (msb will become the most significant bit of out value). 
+
       ROTATE_RIGHT[14]:
