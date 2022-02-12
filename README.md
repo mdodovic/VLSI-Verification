@@ -53,8 +53,13 @@ The verification test of this component has covered:
       #  == got {msb = 0, output = 11100010, lsb = 0} // + 2
       ```
 
-      ADD[4]:
+      ADD[4]: PASS!
+      
+      Add operation functionality: add out value and value from input. If there is any carry this will be stored in msb.
+      
       SUB[5]:
+
+      
       INVERT[6]:
       SERIAL_INPUT_LSB[7]:
       SERIAL_INPUT_MSB[8]:
