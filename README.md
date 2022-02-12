@@ -113,7 +113,10 @@ The verification test of this component has covered:
 
       Serial input MSB operation functionality: shift out for 1 place right (lsb will become the least significant bit of out value) and set out's most significant bit with given input msb value. 
       
-      SHIFT_LOGICAL_LEFT[9]:
+      SHIFT_LOGICAL_LEFT[9]: PASS!
+
+      Shift logical left operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's least significant bit to 1'b0. 
+
       SHIFT_LOGICAL_RIGHT[10]:
       SHIFT_ARITHMETIC_LEFT[11]:
       SHIFT_ARITHMETIC_RIGHT[12]:
