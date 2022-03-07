@@ -181,9 +181,9 @@ The verification test of this component has covered:
       Rotate right operation functionality: rotate out for 1 place right (lsb will become the least significant bit of out value). 
 	  
 ## reg8_full (Design Under the Test)
-	  
-	Register with all control signals and has proper behavior on each of those signals.
+	
+Register with all control signals and has proper behavior on each of those signals.
 	
 ## reg8_ld_inc (Design Under the Test)
 	  
-	Register with only load and increment control signals and has proper behavior on each of those signals.
+Register with only load and increment control signals and has proper behavior on each of those signals.
