@@ -1,7 +1,8 @@
 # VLSI-Verification
-TBD
 
-reg8_defected
+## reg8_defected (Design Under the Test)
+
+This DUT has several errors and they are listed below.
 
 The verification test of this component has covered:
  - no operation invoked (control register is equal to 0): 
@@ -55,11 +56,11 @@ The verification test of this component has covered:
 
       ADD[4]: PASS!
       
-      Add operation functionality: add out value and value from input. If there is any carry this will be stored in msb.
+      Add operation functionality: add out value and value from the input. If there is any carry this will be stored in msb.
       
       SUB[5]: FAIL!
       
-      Sub operation functionality: sub out value with value from input. If there is any borrow this will be stored in msb. Instead, it add out value and value from input. Two successive blocks for representation:
+      Sub operation functionality: sub out value with value from the input. If there is any borrow this will be stored in msb. Instead, it adds value and value from the input. Two successive blocks for representation:
       ```
       input = 00111011
       #  expect {msb = 0, output = 01000010, lsb = 0} // initial state
@@ -72,7 +73,7 @@ The verification test of this component has covered:
 
       INVERT[6]: FAIL!
 
-      Invert operation functionality: invert out value. Instead, it leaves out as it was before operation. Three successive blocks for representation:
+      Invert operation functionality: invert out value. Instead, it leaves out as it was before the operation. Three successive blocks for representation:
       ```
       #  expect {msb = 0, output = 01000001, lsb = 0} // initial state
       #  == got {msb = 0, output = 01000001, lsb = 0} // initial state
@@ -88,7 +89,7 @@ The verification test of this component has covered:
 
       SERIAL_INPUT_LSB[7]: FAIL!
 
-      Serial input LSB operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's least significant bit with given input lsb value. Instead, it properly shifts the out value but always fill the out's least significant bit with 1'b1. 
+      Serial input LSB operation functionality: shift out for 1 place left (msb will become the most significant bit of out value) and set out's a least significant bit with given input lsb value. Instead, it properly shifts the out value but always fills the out's least significant bit with 1'b1. 
 
       First situation (```input lsb = 1'b1```), two successive blocks for representation:
       ```
@@ -178,3 +179,11 @@ The verification test of this component has covered:
       ROTATE_RIGHT[14]: PASS!
 
       Rotate right operation functionality: rotate out for 1 place right (lsb will become the least significant bit of out value). 
+	  
+## reg8_full (Design Under the Test)
+	  
+	Register with all control signals and has proper behavior on each of those signals.
+	
+## reg8_ld_inc (Design Under the Test)
+	  
+	Register with only load and increment control signals and has proper behavior on each of those signals.
